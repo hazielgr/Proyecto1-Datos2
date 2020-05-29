@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/haziel/CLionProjects/VSPointer/VsPointer.h
+iostream
+-
+
+/home/haziel/CLionProjects/VSPointer/main.cpp
+iostream
+-
+VsPointer.h
+/home/haziel/CLionProjects/VSPointer/VsPointer.h
+
