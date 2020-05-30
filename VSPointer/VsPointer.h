@@ -16,7 +16,9 @@ private:
 public:
    static VsPointer<T> New();
    void operator=(VsPointer<T> newdata);
+    void operator=(T newdata);
    T& operator*();
+   T operator&();
    T getData();
 };
 
@@ -36,12 +38,18 @@ template <class T>
 T& VsPointer<T>::operator*() {
     return *data;
 }
-
+template <typename T>
+T VsPointer<T>::operator&() {
+    return *data;
+}
 //sobrecarga el operador "=" para igualar dos VsPointers, es decir hacer un copy de la primera instancia
 template <class T>
 void VsPointer<T>::operator=(VsPointer<T> newData) {
     this->data = newData.data;
-    cout<<"Se asigna un puntero"<<endl;
+}
+template <class T>
+void VsPointer<T>::operator=(T newData) {
+    *this->data = newData;
 }
 //Da return del dato T*
 template <typename T>
