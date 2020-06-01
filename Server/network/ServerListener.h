@@ -6,7 +6,6 @@
  * @author Joseph Jimenez
  * @version 1.0
  */
-
 #pragma once
 #include <sys/socket.h>
 #include <iostream>
@@ -23,11 +22,12 @@ class ServerListener;
 class ServerListener{
 public:
 /**
- * Filling parameter to start the server
+ * Building the server
  * @param ipAddress
  * @param port
+ * @param password
  */
-    ServerListener(const char* ipAddress, int port) : m_ipAddress(ipAddress), m_port(port) { }
+    ServerListener(const char* ipAddress, int port, const char* password) : m_ipAddress(ipAddress), m_port(port), m_password(password) { }
     int init();
 protected:
     void sendToClient(int clientSocket, const char* msg, int length);
@@ -36,9 +36,11 @@ protected:
     int                   m_socket;           /// State of socket
     sockaddr_in           client_addr{};      /// Handles Clients socket structure
     socklen_t             clientSize;         /// Client Size
+    std::string           m_password;         /// Server Password
 private:
     sockaddr_in           server_addr{};      /// Handles Server sockets structure
     std::string           m_ipAddress;        /// IPAddress of server="127.0.0.1"
     int                   m_port;             /// Port for server use= 54000
+
 };
 #endif //SERVERMEMORYMANAGER_SERVERLISTENER_H

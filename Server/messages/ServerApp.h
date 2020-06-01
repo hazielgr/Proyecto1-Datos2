@@ -18,12 +18,18 @@
  */
 class ServerApp : public ServerListener{
 public:
-    ServerApp(const char* ipAddress, int port) : ServerListener(ipAddress, port) { }
+    ServerApp(const char* ipAddress, int port,const char* password ) : ServerListener(ipAddress, port, password) { }
     int run();
-    //Functions handling messages
+    std::string loginOk="SERVER Password correct";
+    std::string loginBad="SERVER Password incorrect";
+    std::string confirm = "Connected Successful, I can read your messages \r\n";
+    std::string sendData="Data depends on saved";
 protected:
+    // Handler for when a message is received from the client
     virtual int onMessageReceived(int clientSocket, const char* msg, int length);
+    //Manage the Password Received
+    virtual int onPasswordReceived(int clientSocket, const char* msg, int length);
+    // Handler for client connections
     virtual void onClientConnected(int clientSocket);
 };
-
 #endif //SERVERMEMORYMANAGER_SERVERAPP_H
