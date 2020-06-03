@@ -6,6 +6,7 @@
  */
 #include <fstream>
 #include "ServerApp.h"
+#include "json/jsonMachine.h"
 #include <crypto++/hex.h>
 #include <crypto++/md5.h>
 
@@ -34,10 +35,16 @@ int ServerApp::run() {
                         sendToClient(client, loginOk.c_str(), loginOk.size() + 1);
                         security = false;
                     }else{
+                        std::cout << "WrongPassword" << std::endl;
                         sendToClient(client, loginBad.c_str(), loginBad.size() + 1);
                     }
-                }else{}
-                onMessageReceived(client,buffer,bytesReceived);
+                }else{
+                    if(onMessageReceived(client,buffer,bytesReceived)){
+                        sendToClient(client, handledOk.c_str(), handledOk.size() + 1);
+                    }else{
+                        sendToClient(client, handledBad.c_str(), handledBad.size() + 1);
+                    }
+                }
             }
         }while(bytesReceived>=0);
         close(client);
@@ -51,7 +58,12 @@ int ServerApp::run() {
 void ServerApp::onClientConnected(int clientSocket){
     sendToClient(clientSocket, confirm.c_str(), confirm.size() + 1);
 }
-
+/**
+ * @brief Handles the login to the server
+ * @param clientSocket
+ * @param msg;
+ * @param length;
+ */
 int ServerApp::onPasswordReceived(int clientSocket, const char* msg, int length) {
     CryptoPP::MD5 hashClient;
     CryptoPP::MD5 hashServer;
@@ -76,6 +88,7 @@ int ServerApp::onPasswordReceived(int clientSocket, const char* msg, int length)
     encoderServer.MessageEnd();
 
     if (md5Client==md5Server){
+        std::cout << "Password Works" << std::endl;
         return 1;
     }else{
         return 0;
@@ -87,7 +100,20 @@ int ServerApp::onPasswordReceived(int clientSocket, const char* msg, int length)
  * @param msg
  * @param length
  */
+
 int ServerApp::onMessageReceived(int clientSocket, const char* msg, int length) {
+    std::string messageString=msg;
+    if(msg==IDTest){
+        return 1;
+    }else if( jsonMachine::Deserialize(&saveJsonData,messageString)) {
+        return 1;
+    }else{
+        printf("-->%s\n", msg);
+        return 0;
     }
 }
 
+
+/*
+char *IP = inet_ntoa(client_addr.sin_addr);
+    int Port = ntohs(client_addr.sin_port);*/

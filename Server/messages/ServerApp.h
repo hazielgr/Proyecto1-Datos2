@@ -8,6 +8,7 @@
  */
 #pragma once
 #include "../network/ServerListener.h"
+#include "json/dataJsonClass.h"
 #include <string>
 #include <sstream>
 #include <vector>
@@ -20,10 +21,13 @@ class ServerApp : public ServerListener{
 public:
     ServerApp(const char* ipAddress, int port,const char* password ) : ServerListener(ipAddress, port, password) { }
     int run();
-    std::string loginOk="SERVER Password correct";
+    std::string IDTest="00001";
+    dataJsonClass saveJsonData;
+    std::string handledOk="We handled your info :) ";
+    std::string handledBad="Data didn't do anything ";
+    std::string loginOk="SERVER Password correct ";
     std::string loginBad="SERVER Password incorrect";
     std::string confirm = "Connected Successful, I can read your messages \r\n";
-    std::string sendData="Data depends on saved";
 protected:
     // Handler for when a message is received from the client
     virtual int onMessageReceived(int clientSocket, const char* msg, int length);
