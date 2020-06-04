@@ -13,13 +13,15 @@ class VsPointer {
 private:
     T* data;
     VsPointer();
+    string type;
 public:
    static VsPointer<T> New();
-   void operator=(VsPointer<T> newdata);
-    void operator=(T newdata);
+    VsPointer& operator=(VsPointer<T> newData);
+    VsPointer& operator=(T newData);
    T& operator*();
    T operator&();
    T getData();
+   string getType();
 };
 
 //Ejecuta el constructor de la clase para instanciar la clase
@@ -32,6 +34,19 @@ VsPointer<T> VsPointer<T>::New() {
 template <class T>
 VsPointer<T>::VsPointer() {
     this->data = new T;
+    if (typeid(T)== typeid(string)){
+        this->type = "string";
+    }
+    else if (typeid(T)== typeid(int)){
+        this->type = "int";
+    }
+    else if (typeid(T)== typeid(bool)){
+        this->type = "bool";
+    }
+    else if (typeid(T)== typeid(char)){
+        this->type = "char";
+    }
+
 }
 //sobrecarga operador * para poder asignar datos a la instancia
 template <class T>
@@ -44,11 +59,11 @@ T VsPointer<T>::operator&() {
 }
 //sobrecarga el operador "=" para igualar dos VsPointers, es decir hacer un copy de la primera instancia
 template <class T>
-void VsPointer<T>::operator=(VsPointer<T> newData) {
+VsPointer<T>& VsPointer<T>::operator=(VsPointer<T> newData) {
     this->data = newData.data;
 }
 template <class T>
-void VsPointer<T>::operator=(T newData) {
+VsPointer<T>& VsPointer<T>::operator=(T newData) {
     *this->data = newData;
 }
 //Da return del dato T*
@@ -56,5 +71,8 @@ template <typename T>
 T VsPointer<T>::getData() {
     return *this->data;
 }
-
+template <typename T>
+string VsPointer<T>::getType() {
+    return this->type;
+}
 #endif //VSPOINTER_VSPOINTER_H
