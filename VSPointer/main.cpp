@@ -1,21 +1,10 @@
-#include <iostream>
-#include "VsPointer.h"
 
+#include "VsPointer.hpp"
 int main() {
-    VsPointer<string> myPtr = VsPointer<string>::New();
-    VsPointer<string> myPtr2 = VsPointer<string>::New();
-    VsPointer<string> myPtr3 = VsPointer<string>::New();
-    *myPtr = "Haziel";
-    myPtr2 = myPtr;
-    string str = &myPtr;
-    myPtr3 = "Haziel";
-    cout<<str<<endl;
-    cout<<myPtr.getData()<<endl;
-    cout<<myPtr2.getData()<<endl;
-    cout<<myPtr3.getData()<<endl;
-
-
-
+    VsPointer<int> haziel = VsPointer<int>::New();
+    VsPointer<int> haziel2 = VsPointer<int>::New();
+    haziel2 = 8;
+    haziel = haziel2;
 
 return 0;
 }
