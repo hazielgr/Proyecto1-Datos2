@@ -2,12 +2,14 @@
  * @file ServerApp.cpp
  * @brief Handling incoming connections messages
  * @author Joseph Jimenez
- * @version 1.0
+ * @version 2.0
  */
 #include <fstream>
 #include "ServerApp.h"
+#include "json/jsonMachine.h"
 #include <crypto++/hex.h>
 #include <crypto++/md5.h>
+
 
 /** @brief handles connection with client
   * @return Successful state
@@ -29,15 +31,16 @@ int ServerApp::run() {
                 close(m_socket);
                 std::cout<< "Bytes Received Error";
             }else{
-                if(!security==false){
+                if(security==true){
                     if(onPasswordReceived(client,buffer,bytesReceived)) {
-                        sendToClient(client, loginOk.c_str(), loginOk.size() + 1);
+                        sendLoginOk(client);
                         security = false;
                     }else{
-                        sendToClient(client, loginBad.c_str(), loginBad.size() + 1);
+                        sendLoginBad(client);
                     }
-                }else{}
-                onMessageReceived(client,buffer,bytesReceived);
+                }else{
+                    onMessageReceived(client,buffer,bytesReceived);
+                }
             }
         }while(bytesReceived>=0);
         close(client);
@@ -51,7 +54,30 @@ int ServerApp::run() {
 void ServerApp::onClientConnected(int clientSocket){
     sendToClient(clientSocket, confirm.c_str(), confirm.size() + 1);
 }
-
+void ServerApp::sendLoginOk(int clientSocket) {
+    sendToClient(clientSocket, loginOk.c_str(), loginOk.size() + 1);
+}
+void ServerApp::sendLoginBad(int clientSocket) {
+    sendToClient(clientSocket, loginBad.c_str(), loginBad.size() + 1);
+}
+void ServerApp::sendMessage(int clientSocket,const char* msg, int length) {
+    sendToClient(clientSocket, msg, length + 1);
+}
+void ServerApp::sendID(int clientSocket) {
+    sendToClient(clientSocket, IDTest.c_str(), IDTest.size() + 1);
+}
+void ServerApp::sendData(int clientSocket){
+    std::string message=Data;
+    if(jsonMachine::Deserialize(Data)) {
+        sendToClient(clientSocket, message.c_str(), message.size() + 1);
+    }
+}
+/**
+ * @brief Handles the login to the server
+ * @param clientSocket
+ * @param msg;
+ * @param length;
+ */
 int ServerApp::onPasswordReceived(int clientSocket, const char* msg, int length) {
     CryptoPP::MD5 hashClient;
     CryptoPP::MD5 hashServer;
@@ -76,6 +102,7 @@ int ServerApp::onPasswordReceived(int clientSocket, const char* msg, int length)
     encoderServer.MessageEnd();
 
     if (md5Client==md5Server){
+        std::cout << "Password Works" << std::endl;
         return 1;
     }else{
         return 0;
@@ -88,6 +115,18 @@ int ServerApp::onPasswordReceived(int clientSocket, const char* msg, int length)
  * @param length
  */
 int ServerApp::onMessageReceived(int clientSocket, const char* msg, int length) {
+    std::string messageString= msg;
+    if(messageString==IDTest){
+        std::cout << "ID Recon"<< std::endl;
+        sendID(clientSocket);
+    }else if( jsonMachine::Deserialize(msg)) {
+        std::cout << "Json Recon"<< std::endl;
+        sendData(clientSocket)  ;
+    }else{
+        printf("-->%s\n", msg);
+        sendMessage(clientSocket,msg,length);
+        return 0;
     }
 }
+
 
