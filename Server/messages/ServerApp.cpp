@@ -9,8 +9,6 @@
 #include "json/jsonMachine.h"
 #include <crypto++/hex.h>
 #include <crypto++/md5.h>
-
-
 /** @brief handles connection with client
   * @return Successful state
   * When the server's init, will try to accepts the connection
@@ -20,24 +18,30 @@ int ServerApp::run() {
     bool security = true;
     bool running = true;
     while (running) {
-        int client = accept(m_socket, (struct sockaddr *) &client_addr, &clientSize); //Accepts client and keeps his info
+        //Conecta al Ciente
+        int client = accept(m_socket, (struct sockaddr *) &client_addr, &clientSize);
+        //Envia un mensaje que confirma comunicacion
         onClientConnected(client);
+        //Al recibir un mensaje
         int bytesReceived;
         do{
             char buffer[4096];
             memset(buffer, 0,4096); //space for the bytes received
             bytesReceived=recv(client,buffer, 4096,0);
+            //Si el mensaje es un error -1
             if(bytesReceived<0){
                 close(m_socket);
                 std::cout<< "Bytes Received Error";
             }else{
+                //Un mensaje correcto procede a revisar si ya envio el password del server, sino pasa al manejador de mensajes
                 if(security==true){
-                    if(onPasswordReceived(client,buffer,bytesReceived)) {
-                        sendLoginOk(client);
+                    if(onPasswordReceived(client,buffer,bytesReceived)==1) {
                         security = false;
+                        //Enviando mensaje de LogIn correcto
+                        sendLoginOk(client);
                     }else{
-                        sendLoginBad(client);
-                    }
+                        //Enviando mensaje LogIn incorrecto
+                        sendLoginBad(client);}
                 }else{
                     onMessageReceived(client,buffer,bytesReceived);
                 }
@@ -63,14 +67,14 @@ void ServerApp::sendLoginBad(int clientSocket) {
 void ServerApp::sendMessage(int clientSocket,const char* msg, int length) {
     sendToClient(clientSocket, msg, length + 1);
 }
-void ServerApp::sendID(int clientSocket) {
-    sendToClient(clientSocket, IDTest.c_str(), IDTest.size() + 1);
-}
-void ServerApp::sendData(int clientSocket){
+void ServerApp::receivedID(int clientSocket) {
     std::string message=Data;
     if(jsonMachine::Deserialize(Data)) {
         sendToClient(clientSocket, message.c_str(), message.size() + 1);
     }
+}
+void ServerApp::receivedData(int clientSocket){
+    sendToClient(clientSocket, IDTest.c_str(), IDTest.size() + 1);
 }
 /**
  * @brief Handles the login to the server
@@ -116,13 +120,20 @@ int ServerApp::onPasswordReceived(int clientSocket, const char* msg, int length)
  */
 int ServerApp::onMessageReceived(int clientSocket, const char* msg, int length) {
     std::string messageString= msg;
-    if(messageString==IDTest){
+    //Al encontrar que pertene al grupo de IDs que tenemos
+    if(messageString=="1"){
+        //procedemos a buscar la data del ID y Enviarla
         std::cout << "ID Recon"<< std::endl;
-        sendID(clientSocket);
+        receivedID(clientSocket);
+        return 0;
+    //Si el mensaje esta en un formato JSON serializable
     }else if( jsonMachine::Deserialize(msg)) {
+        //procedemos a deserealizar esa data, guardarla y enviar su ID
         std::cout << "Json Recon"<< std::endl;
-        sendData(clientSocket)  ;
+        receivedData(clientSocket) ;
+        return 0;
     }else{
+        //Si recibe un mensaje que no es un ID o un tipo de mensaje Deserealizable, imprime y envia el mensaje recibido
         printf("-->%s\n", msg);
         sendMessage(clientSocket,msg,length);
         return 0;

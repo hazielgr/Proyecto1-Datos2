@@ -13,7 +13,6 @@
 #include <vector>
 #include <iterator>
 #include <jsoncpp/json/value.h>
-
 /**
  * @class ServerApp
  * @brief Define specific answers to the client connected
@@ -34,8 +33,8 @@ protected:
     virtual int onPasswordReceived(int clientSocket, const char* msg, int length);
     // Handler for client connections
     virtual void sendMessage(int clientSocket,const char* msg, int length);
-    virtual void sendData(int clientSocket);
-    virtual void sendID(int clientSocket);
+    virtual void receivedData(int clientSocket);
+    virtual void receivedID(int clientSocket);
     virtual void onClientConnected(int clientSocket);
     virtual void sendLoginOk(int clientSocket);
     virtual void sendLoginBad(int clientSocket);

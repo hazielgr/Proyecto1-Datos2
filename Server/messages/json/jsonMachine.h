@@ -11,7 +11,6 @@
 class jsonMachine{
 public:
     static bool Deserialize(std::basic_string<char> giveMeStream );
-    static Json::Value saveJsonData;
 
 private:
     jsonMachine(void){};
