@@ -12,7 +12,6 @@ public:
     ClientApp(const char* ipAddress, int port) : ConnectServer(ipAddress, port) { }
     int run();
     bool running=true;
-    std::string confirm = "Connected Successful, I can read your messages \r\n";
     std::string password="password";
     std::string Data="{ \"ID\": [{\"ReferencesQuantity\": 1, \"DataType\":\"String\",\"Name\":\"Joseph\"}, {\"ReferencesQuantity\": 2, \"DataType\":\"Int\",\"Data\":\"89\"} ]}";
     std::string ID="00001";
@@ -22,8 +21,7 @@ protected:
     virtual int onMessageReceived(int serverSocket, const char* msg, int length);
     //Handles sending messages
     virtual int sendPassword(int serverSocket);
-    virtual int sendConfirm(int serverSocket);
     virtual int sendID(int serverSocket);
-    virtual int sendData(int serverSocket, const char *i);
+    virtual int sendData(int serverSocket);
 };
 #endif //CLIENTSIDE_CLIENTAPP_H

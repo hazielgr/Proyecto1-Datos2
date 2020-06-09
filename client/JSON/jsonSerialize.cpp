@@ -9,9 +9,10 @@ int jsonSerialize::deCode(std::string giveMeString) {
     Json::Reader reader;
     bool parsingSuccessful = reader.parse( giveMeString, root );
     if ( !parsingSuccessful ){
-        std::cout << "Error parsing the string" << std::endl;
+        std::cout << "DataNoParceble" << std::endl;
         return 0;
     }
+    //al parcear el mensaje recibido, se itera para obtener cada valor
     for( Json::Value::const_iterator outer = root.begin() ; outer != root.end() ; outer++ ){
         for( Json::Value::const_iterator inner = (*outer).begin() ; inner!= (*outer).end() ; inner++ ){
             std::cout << inner.key() << ": " << *inner << std::endl;
