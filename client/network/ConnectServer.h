@@ -19,11 +19,15 @@ class ConnectServer{
 public:
     ConnectServer(const char* ipAddress, int port) : m_ipAddress(ipAddress), m_port(port) { }
     int init();
-    void onMessageReceived(int clientSocket, const char* msg, int length);
-    int sock;
-    sockaddr_in           client_addr;      /// Handles Client sockets structure
+    void sendToServer(int serverSocket, const char* msg, int length);
+    void onMessageReceived(int serverSocket, const char* msg, int length);
+private:
+    /// Handles Client sockets structure
     std::string           m_ipAddress;        /// IPAddress of server="127.0.0.1"
     int                   m_port;             /// Port for server use= 54000
+protected:
+    int sock;
+    sockaddr_in           client_addr;
 };
 
 #endif //CLIENTSIDE_CONNECTSERVER_H

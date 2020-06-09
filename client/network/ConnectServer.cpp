@@ -19,5 +19,13 @@ int ConnectServer::init() {
     inet_pton(AF_INET, m_ipAddress.c_str(), &client_addr.sin_addr);
     return sock;
 }
-void ConnectServer::onMessageReceived(int clientSocket, const char* msg, int length){
+/** @brief Sends message to server
+  * @param serverSocket the client
+  * @param msg the message
+  * @param length size of message
+  */
+void ConnectServer::sendToServer(int serverSocket, const char *msg, int length) {
+    send(serverSocket, msg, length, 0);
+}
+void ConnectServer::onMessageReceived(int serverSocket, const char* msg, int length){
 }
