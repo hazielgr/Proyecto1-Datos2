@@ -25,14 +25,43 @@ int jsonSerialize::deCode(std::string giveMeString) {
  *@param pointer
  * @version 1.0
  */
-int jsonSerialize::enCode(VsPointer<string> pointer) {
-    //"{ \"ID\": [{\"ReferencesQuantity\": 1, \"DataType\":\"String\",\"Name\":\"Joseph\"}, {\"ReferencesQuantity\": 2, \"DataType\":\"Int\",\"Data\":\"89\"} ]}";
+std::string jsonSerialize::enCode(VsPointer<string> pointer) {
     Json::Value save;
+    Json::FastWriter fastWriter;
     save["ID"]="ID";
     save["Referencess"]=3;
     save["DataType"]=pointer.getType();
     save["Data"]=pointer.getData();
     Json::StyledWriter styledWriter;
     std::cout << styledWriter.write(save);
-    return 1;
+    std::string output = fastWriter.write(save);
+    std::cout<< output;
+    return output;
 }
+std::string jsonSerialize::enCode(VsPointer<int> pointer) {
+    Json::Value save;
+    Json::FastWriter fastWriter;
+    save["ID"]="ID";
+    save["Referencess"]=3;
+    save["DataType"]=pointer.getType();
+    save["Data"]=pointer.getData();
+    Json::StyledWriter styledWriter;
+    std::cout << styledWriter.write(save);
+    std::string output = fastWriter.write(save);
+    std::cout<< output;
+    return output;
+}
+std::string jsonSerialize::enCode(VsPointer<bool> pointer) {
+    Json::Value save;
+    Json::FastWriter fastWriter;
+    save["ID"]="ID";
+    save["Referencess"]=3;
+    save["DataType"]=pointer.getType();
+    save["Data"]=pointer.getData();
+    Json::StyledWriter styledWriter;
+    std::cout << styledWriter.write(save);
+    std::string output = fastWriter.write(save);
+    std::cout<< output;
+    return output;
+}
+

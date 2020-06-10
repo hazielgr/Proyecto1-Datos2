@@ -14,7 +14,9 @@
 class jsonSerialize{
 public:
     static int deCode(std::string giveMeString);
-    static int enCode(VsPointer<string> pointer);
-};
+    static std::string enCode(VsPointer<string> pointer);
+    static std::string enCode(VsPointer<int> pointer);
+    static std::string enCode(VsPointer<bool> pointer);
 
+};
 #endif //LABBING_JSONSERIALIZE_H
