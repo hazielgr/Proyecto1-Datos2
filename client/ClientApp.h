@@ -13,7 +13,7 @@ public:
     int run();
     bool running=true;
     std::string password="password";
-    std::string Data="{ \"ID\": [{\"ReferencesQuantity\": 1, \"DataType\":\"String\",\"Name\":\"Joseph\"}, {\"ReferencesQuantity\": 2, \"DataType\":\"Int\",\"Data\":\"89\"} ]}";
+    std::string Data;
     std::string ID="00001";
     static int connectServer(const char *IP, int Port );
 protected:

@@ -1,63 +1,120 @@
 #include "jsonSerialize.h"
 /**
+ * @brief this methods creates VsPointer Objects from messages
+ * @param DataType
+ * @param Data
+ * @param ID
+ * @param References
+ * @return true if was ok creating the Object
+ * @version 1.0
+ */
+bool jsonSerialize::create_Object(std::string DataType, std::string Data, std::string ID, std::string References) {
+    if(DataType=="string"){
+        std::cout << DataType << std::endl;
+        std::cout << "Creating VSPointer<string>" << std::endl;
+        std::cout << Data << std::endl;
+        std::cout << "Asignando Data asString()" << std::endl;
+    }else if(DataType=="int"){
+        std::cout << DataType << std::endl;
+        std::cout << "Creating VSPointer<int>" << std::endl;
+        std::cout << Data << std::endl;
+        std::cout << "Asignando Data asInt()" << std::endl;
+    }else if(DataType=="bool"){
+        std::cout << DataType << std::endl;
+        std::cout << "Creating VSPointer<bool>" << std::endl;
+        std::cout << Data << std::endl;
+        std::cout << "Asignando Data asBool()" << std::endl;
+    }else{
+        return false;
+    }
+    std::cout << ID << std::endl;
+    std::cout << References << std::endl;
+    std::cout << "Asignando ID y Referencias" << std::endl;
+
+    return true;
+
+}
+/**
  * @brief On this method can handle String with json structure
  * @param giveMeString
- * @version 2.0
+ * @version 3.0
  */
-int jsonSerialize::deCode(std::string giveMeString) {
+bool jsonSerialize::deCode(std::string giveMeString) {
     Json::Value root;
     Json::Reader reader;
-    bool parsingSuccessful = reader.parse( giveMeString, root );
+    std::cout<< giveMeString<< std::endl;
+    bool parsingSuccessful = reader.parse( giveMeString.c_str(), root );
     if ( !parsingSuccessful ){
         std::cout << "DataNoParceble" << std::endl;
         return 0;
-    }
-    //al parcear el mensaje recibido, se itera para obtener cada valor
-    for( Json::Value::const_iterator outer = root.begin() ; outer != root.end() ; outer++ ){
-        for( Json::Value::const_iterator inner = (*outer).begin() ; inner!= (*outer).end() ; inner++ ){
-            std::cout << inner.key() << ": " << *inner << std::endl;
+    }else {
+        for(Json::Value::const_iterator i = root.begin(); i!= root.end(); i++)  {
+            std::string DataType = root["DataType"].asString();
+            std::string Data = root["Data"].asString();
+            std::string ID = root["ID"].asString();
+            std::string References = root["References"].asString();
+            if(create_Object(DataType,Data,ID,References)){
+                std::cout << "Inited Creation of Object"<< std::endl;
+                return true;
+            }else{
+                return false;
+            }
         }
     }
-    return 1;
+    return false;
 }
 /**
- *@brief this methods can receive a object Pointer
- *@param pointer
+ *@brief this methods receive a single pointer and return  string JSON
+ *@param pointer receive a VsPointer<String>
+ *@return output
  * @version 1.0
  */
 std::string jsonSerialize::enCode(VsPointer<string> pointer) {
     Json::Value save;
     Json::FastWriter fastWriter;
     save["ID"]="ID";
-    save["Referencess"]=3;
-    save["DataType"]=pointer.getType();
+    save["References"]=4;
     save["Data"]=pointer.getData();
+    save["DataType"]=pointer.getType();
+
     Json::StyledWriter styledWriter;
     std::cout << styledWriter.write(save);
     std::string output = fastWriter.write(save);
     std::cout<< output;
     return output;
 }
+/**
+ *@brief this methods receive a single pointer and return  string JSON
+ *@param pointer receive a VsPointer<int>
+ *@return output
+ * @version 1.0
+ */
 std::string jsonSerialize::enCode(VsPointer<int> pointer) {
     Json::Value save;
     Json::FastWriter fastWriter;
     save["ID"]="ID";
-    save["Referencess"]=3;
-    save["DataType"]=pointer.getType();
+    save["References"]=3;
     save["Data"]=pointer.getData();
+    save["DataType"]=pointer.getType();
     Json::StyledWriter styledWriter;
     std::cout << styledWriter.write(save);
     std::string output = fastWriter.write(save);
     std::cout<< output;
     return output;
 }
+/**
+ *@brief this methods receive a single pointer and return  string JSON
+ *@param pointer receive a VsPointer<bool>
+ *@return output
+ * @version 1.0
+ */
 std::string jsonSerialize::enCode(VsPointer<bool> pointer) {
     Json::Value save;
     Json::FastWriter fastWriter;
     save["ID"]="ID";
-    save["Referencess"]=3;
-    save["DataType"]=pointer.getType();
+    save["References"]=0;
     save["Data"]=pointer.getData();
+    save["DataType"]=pointer.getType();
     Json::StyledWriter styledWriter;
     std::cout << styledWriter.write(save);
     std::string output = fastWriter.write(save);

@@ -23,10 +23,15 @@ int ClientApp::run() {
         if(connectResponse==-1)std::cerr<< "Error.Connecting server socket ";
         int bytesReceived;
         char buf[4096];
+        //Creamos Pointers de prueba para enviar la Data
         std::string userInput;
+        VsPointer<string> myPtr = VsPointer<string>::New();
+        *myPtr = "Haziel";
+        std::string pointerOne =jsonSerialize::enCode(myPtr);
+        //Enviamos el password directamente
+        sendPassword(sock);
         do{
-            //Enviamos el password directamente
-            sendPassword(sock);
+            Data= pointerOne;
             // Prompt the user for some text
             getline(std::cin, userInput);
             //Mientras el usuario escriba y logre un input >0
@@ -59,7 +64,9 @@ int ClientApp::connectServer(const char *IP, int Port) {
     if(clientApp.init()!=0){
         clientApp.run();
     }
+    return 0;
 }
+
 //Estos manejan los mensajes que estamos enviando
 int ClientApp::sendPassword(int serverSocket) {
     sendToServer(serverSocket,password.c_str(),password.size()+1);
@@ -77,23 +84,20 @@ int ClientApp::sendData(int serverSocket) {
  * @param length
  */
 int ClientApp::onMessageReceived(int serverSocket, const char* msg, int length) {
-    //debido a que el server nos responde con lo que escribimos si no logra manejar el dato
-    //En el caso de recibir un 1 se habilita el lograr probar enviar 1 ID
+    //Funcion de prueba enviar ID, habilitar al cliente enviado
     if(msg=="1") {
         sendID(serverSocket);
         return 0;
-        //En el caso de enviar un 2 podemos probar que pasa al Enviar un string con Data
+        //Funcion de prueba enviar Data, habilitar al cliente enviado
     }else if(msg=="2"){
         sendData(serverSocket);
         return 0;
-        //En el caso de recibir data en formato json
     }else if(jsonSerialize::deCode(msg)) {
-        printf("DeCodeCool");
-        sendData(serverSocket);
-        return 0;
+        printf("I can decode you JSON");
+        return 1;
     }else{
-        printf("-->%s\n", msg);
-        return 0;
+        printf("-->This is your ID:%s\n", msg);
+        return 1;
     }
 }
 
