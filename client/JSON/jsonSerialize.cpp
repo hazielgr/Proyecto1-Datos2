@@ -1,3 +1,4 @@
+#include <sstream>
 #include "jsonSerialize.h"
 /**
  * @brief this methods creates VsPointer Objects from messages
@@ -6,31 +7,34 @@
  * @param ID
  * @param References
  * @return true if was ok creating the Object
- * @version 1.0
+ * @version 2.0
  */
 bool jsonSerialize::create_Object(std::string DataType, std::string Data, std::string ID, std::string References) {
     if(DataType=="string"){
-        std::cout << DataType << std::endl;
-        std::cout << "Creating VSPointer<string>" << std::endl;
-        std::cout << Data << std::endl;
-        std::cout << "Asignando Data asString()" << std::endl;
+        VsPointer<string> myPtr = VsPointer<string>::New();
+        *myPtr=Data;
+        std::cout << myPtr.getData() << std::endl;
+        std::cout << myPtr.getType() << std::endl;
+        std::cout << "Created VSPointer<string>" << std::endl;
     }else if(DataType=="int"){
-        std::cout << DataType << std::endl;
+        VsPointer<int> myPtr = VsPointer<int>::New();
+        int dataInt=std::stoi( Data );
+        *myPtr=dataInt;
+        std::cout << myPtr.getData() << std::endl;
+        std::cout << myPtr.getType() << std::endl;
         std::cout << "Creating VSPointer<int>" << std::endl;
-        std::cout << Data << std::endl;
-        std::cout << "Asignando Data asInt()" << std::endl;
     }else if(DataType=="bool"){
-        std::cout << DataType << std::endl;
+        VsPointer<bool> myPtr = VsPointer<bool>::New();
+        bool b;
+        std::istringstream is(Data);
+        is >> std::boolalpha >> b;
+        *myPtr=b;
+        std::cout << myPtr.getData() << std::endl;
+        std::cout << myPtr.getType() << std::endl;
         std::cout << "Creating VSPointer<bool>" << std::endl;
-        std::cout << Data << std::endl;
-        std::cout << "Asignando Data asBool()" << std::endl;
     }else{
         return false;
     }
-    std::cout << ID << std::endl;
-    std::cout << References << std::endl;
-    std::cout << "Asignando ID y Referencias" << std::endl;
-
     return true;
 
 }
@@ -54,7 +58,6 @@ bool jsonSerialize::deCode(std::string giveMeString) {
             std::string ID = root["ID"].asString();
             std::string References = root["References"].asString();
             if(create_Object(DataType,Data,ID,References)){
-                std::cout << "Inited Creation of Object"<< std::endl;
                 return true;
             }else{
                 return false;
