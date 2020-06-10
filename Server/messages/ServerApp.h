@@ -12,7 +12,7 @@
 #include <sstream>
 #include <vector>
 #include <iterator>
-#include <jsoncpp/json/value.h>
+
 /**
  * @class ServerApp
  * @brief Define specific answers to the client connected
@@ -21,7 +21,7 @@ class ServerApp : public ServerListener{
 public:
     ServerApp(const char* ipAddress, int port,const char* password ) : ServerListener(ipAddress, port, password) { }
     int run();
-    std::string Data="{ \"ID\": [{\"ReferencesQuantity\": 1, \"DataType\":\"String\",\"Name\":\"Joseph\"}, {\"ReferencesQuantity\": 2, \"DataType\":\"Int\",\"Data\":\"89\"} ]}";
+    std::string Data;
     std::string IDTest="00001";
     std::string loginOk="SERVER Password correct ";
     std::string loginBad="SERVER Password incorrect";

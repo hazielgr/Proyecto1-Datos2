@@ -22,9 +22,13 @@ int ServerApp::run() {
         int client = accept(m_socket, (struct sockaddr *) &client_addr, &clientSize);
         //Envia un mensaje que confirma comunicacion
         onClientConnected(client);
+        VsPointer<string> myPtr = VsPointer<string>::New();
+        *myPtr = "Haziel";
+        std::string pointerOne =jsonMachine::enCode(myPtr);
         //Al recibir un mensaje
         int bytesReceived;
         do{
+            Data= pointerOne;
             char buffer[4096];
             memset(buffer, 0,4096); //space for the bytes received
             bytesReceived=recv(client,buffer, 4096,0);
@@ -68,10 +72,8 @@ void ServerApp::sendMessage(int clientSocket,const char* msg, int length) {
     sendToClient(clientSocket, msg, length + 1);
 }
 void ServerApp::receivedID(int clientSocket) {
-    std::string message=Data;
-    if(jsonMachine::Deserialize(Data)) {
-        sendToClient(clientSocket, message.c_str(), message.size() + 1);
-    }
+    sendToClient(clientSocket, Data.c_str(), Data.size() + 1);
+
 }
 void ServerApp::receivedData(int clientSocket){
     sendToClient(clientSocket, IDTest.c_str(), IDTest.size() + 1);
@@ -120,16 +122,12 @@ int ServerApp::onPasswordReceived(int clientSocket, const char* msg, int length)
  */
 int ServerApp::onMessageReceived(int clientSocket, const char* msg, int length) {
     std::string messageString= msg;
-    //Al encontrar que pertene al grupo de IDs que tenemos
-    if(messageString=="1"){
-        //procedemos a buscar la data del ID y Enviarla
+    if(messageString==IDTest){
         std::cout << "ID Recon"<< std::endl;
         receivedID(clientSocket);
         return 0;
-    //Si el mensaje esta en un formato JSON serializable
     }else if( jsonMachine::Deserialize(msg)) {
-        //procedemos a deserealizar esa data, guardarla y enviar su ID
-        std::cout << "Json Recon"<< std::endl;
+        std::cout << msg<< std::endl;
         receivedData(clientSocket) ;
         return 0;
     }else{
