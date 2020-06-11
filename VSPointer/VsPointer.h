@@ -14,7 +14,6 @@ template <typename T>
 class VsPointer {
 private:
     T* data;
-    string type;
 public:
     static VsPointer<T> New();
     VsPointer& operator=(VsPointer<T> newData);
@@ -22,7 +21,6 @@ public:
     T& operator*();
     T operator&();
     T getData();
-    string getType();
     T* getDirection();
     VsPointer();
     ~VsPointer();
@@ -40,19 +38,7 @@ template <class T>
 VsPointer<T>::VsPointer() {
     this->data = new T;
     GarbageCollector* gbC = GarbageCollector::getInstance();
-    if (typeid(T)== typeid(string)){
-        this->type = "string";
-    }
-    else if (typeid(T)== typeid(int)){
-        this->type = "int";
-        gbC->intList.addNode(this->data);
-    }
-    else if (typeid(T)== typeid(bool)){
-        this->type = "bool";
-    }
-    else if (typeid(T)== typeid(char)){
-        this->type = "char";
-    }
+    gbC->addToList(this->data);
 }
 
 //sobrecarga operador * para poder asignar datos a la instancia
@@ -70,7 +56,7 @@ T VsPointer<T>::operator&() {
 template <class T>
 VsPointer<T>& VsPointer<T>::operator=(VsPointer<T> newData) {
     GarbageCollector* gbC = GarbageCollector::getInstance();
-    gbC->intList.copyData(newData.data, this->data);
+    gbC->copyRef(newData.data, this->data);
     this->data = newData.data;
 }
 template <class T>
@@ -82,12 +68,6 @@ VsPointer<T>& VsPointer<T>::operator=(T newData) {
 template <typename T>
 T VsPointer<T>::getData() {
     return *this->data;
-}
-
-//retorna en un string el tipo de dato almanecado en vsPtr
-template <typename T>
-string VsPointer<T>::getType() {
-    return this->type;
 }
 
 //retorna la direccion de memorias de T* vsPtr;
@@ -103,6 +83,6 @@ VsPointer<T>::~VsPointer() {
 template <typename T>
 void VsPointer<T>::deletePtr() {
     GarbageCollector* gbC = GarbageCollector::getInstance();
-    gbC->intList.deleteRef(this->data);
+    gbC->deleteData(this->data);
 }
 #endif //VSPOINTER_VSPOINTER_H

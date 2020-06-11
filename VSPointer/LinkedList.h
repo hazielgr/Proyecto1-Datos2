@@ -7,6 +7,7 @@
 
 #include "Node.h"
 #include<cstdlib>
+#include <string>
 
 using namespace std;
 
@@ -179,5 +180,7 @@ void LinkedList<T>::updateCanRef(T* data, int cantData){
         temp = temp->getNext();
     }
 }
+
+
 
 #endif //VSPOINTER_LINKEDLIST_H
