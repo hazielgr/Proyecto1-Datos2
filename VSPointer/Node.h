@@ -28,7 +28,9 @@ public:
     string getDataType();
     int getReferences();
     void setReferences(int newRef);
+    T* getTdata();
 };
+
 
 template <typename T>
 T Node<T>::getData() {
@@ -83,6 +85,11 @@ void Node<T>::setReferences(int newRef) {
 template <typename T>
 int Node<T>::getReferences() {
     return this->references;
+}
+
+template <typename T>
+T* Node<T>::getTdata(){
+    return this->data;
 }
 
 #endif //GARBAGECOLLECTOR_NODE_H

@@ -16,7 +16,6 @@ class LinkedList {
 private:
     Node<T> *head,*tail;
     int size;
-    //LinkedList<int>* list;
     int ids[1000];
 public:
     LinkedList();
@@ -28,6 +27,7 @@ public:
     void deleteRef(T* removeData);
     int cantRef(T* data);
     void updateCanRef(T* data, int cantData);
+    void freeMemory();
 };
 
 template <typename T>
@@ -67,11 +67,9 @@ template <typename T>
 void LinkedList<T>::display(){
     Node<T>* temp = head;
     while(temp != nullptr){
-        //cout<<temp->getData()<<endl;
-        cout<<temp->getMemDir()<<endl;
+        cout<<temp->getData()<<endl;
         temp = temp->getNext();
     }
-    cout<<this->size<<endl;
 }
 
 //retorna el tamano de lista, es decir la cantidad de elementos de la lista
@@ -130,27 +128,46 @@ void LinkedList<T>::deleteRef(T* removeData){
     auto* temp = new Node<T>;
     temp = this->head;
     if(temp->getMemDir()==removeData){
-        head = temp->getNext();
-        size--;
+        if(temp->getReferences() == 1){
+            temp->setReferences(0);
+            return;
+        }
+        else {
+            head = temp->getNext();
+            size--;
+            delete(temp);
+            int cantRef = this->cantRef(removeData);
+            updateCanRef(removeData,cantRef);
+        }
     }
     else {
-        while (temp->getNext()->getMemDir() != nullptr) {
+        while (temp != nullptr) {
             if (temp->getNext() == this->tail && temp->getNext()->getMemDir() == removeData) {
+                if(temp->getNext()->getReferences()==1){
+                    temp->getNext()->setReferences(0);
+                    break;
+                }
                 this->tail = temp;
                 tail->setNext(temp->getNext()->getNext());
                 size--;
-                return;
+                int cantRef = this->cantRef(removeData);
+                updateCanRef(removeData,cantRef);
+                break;
             }
             if (temp->getNext()->getMemDir() == removeData) {
+                if(temp->getNext()->getReferences()==1){
+                    temp->getNext()->setReferences(0);
+                    break;
+                }
                 temp->setNext(temp->getNext()->getNext());
                 size--;
-                return;
+                int cantRef = this->cantRef(removeData);
+                updateCanRef(removeData,cantRef);
+                break;
             }
             temp = temp->getNext();
         }
     }
-    int cantRef = this->cantRef(removeData);
-    updateCanRef(removeData,cantRef);
 }
 
 //devuelve un int que indica la cantidad de nodos que poseen el valor de data
@@ -181,6 +198,28 @@ void LinkedList<T>::updateCanRef(T* data, int cantData){
     }
 }
 
-
+template <typename T>
+void LinkedList<T>::freeMemory(){
+    Node<T>* temp = head;
+    if(temp->getReferences()==0){
+        delete (temp->getMemDir());
+        head = temp->getNext();
+        delete(temp);
+        size--;
+        return;
+    }
+    else {
+        while (temp->getNext()!= nullptr) {
+            if (temp->getNext()->getReferences() == 0) {
+                delete temp->getNext()->getMemDir();
+                temp->setNext(temp->getNext()->getNext());
+                delete(temp);
+                size--;
+                break;
+            }
+            temp = temp->getNext();
+        }
+    }
+}
 
 #endif //VSPOINTER_LINKEDLIST_H
