@@ -1,3 +1,0 @@
-/home/haziel/CLionProjects/VSPointer/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/haziel/CLionProjects/VSPointer/cmake-build-debug/CMakeFiles/VSPointer.dir
-/home/haziel/CLionProjects/VSPointer/cmake-build-debug/CMakeFiles/edit_cache.dir
