@@ -111,7 +111,12 @@ void LinkedList<T>::copyData(T* newData, T* oldData){
                 temp2 = temp2->getNext();
             }
             temp->setReferences(temp->getReferences()+1);
-            temp2->setReferences(-1);
+            if(temp2->getReferences()>1){
+                temp->setReferences(temp->getReferences()-1);
+            }
+            else{
+                temp2->setReferences(-1);
+            }
             deleteRef(oldData);
             return;
         }
