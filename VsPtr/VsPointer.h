@@ -7,7 +7,6 @@
 
 #include <iostream>
 #include "../GarbageCollector/GarbageCollector.h"
-
 using namespace std;
 
 
@@ -21,8 +20,6 @@ public:
     VsPointer& operator=(T newData);
     T& operator*();
     T operator&();
-    T getData();
-    T* getDirection();
     VsPointer();
     ~VsPointer();
     void deletePtr();
@@ -65,20 +62,12 @@ VsPointer<T>& VsPointer<T>::operator=(T newData) {
     *this->data = newData;
 }
 
-//Retorna el dato almacenado en T* vsPtr
-template <typename T>
-T VsPointer<T>::getData() {
-    return *this->data;
-}
-
-//retorna la direccion de memorias de T* vsPtr;
-template <typename T>
-T* VsPointer<T>::getDirection(){
-    return &(*this->data);
-}
-
 template <typename T>
 VsPointer<T>::~VsPointer() {
+    /*
+    GarbageCollector* gbC = GarbageCollector::getInstance();
+    gbC->deleteData(this->data);
+     */
 }
 
 template <typename T>
@@ -86,4 +75,5 @@ void VsPointer<T>::deletePtr() {
     GarbageCollector* gbC = GarbageCollector::getInstance();
     gbC->deleteData(this->data);
 }
+
 #endif //VSPOINTER_VSPOINTER_H
