@@ -25,8 +25,6 @@ public:
     int generateID();
     void copyData(T* newData, T* oldData);
     void deleteRef(T* removeData);
-    int cantRef(T* data);
-    void updateCanRef(T* data, int cantData);
     void freeMemory();
 };
 
@@ -46,6 +44,9 @@ void LinkedList<T>::addNode(T* n) {
     }
     else if (typeid(T)== typeid(int)){
         temp->setDataType("int");
+    }
+    else if (typeid(T)== typeid(bool)){
+        temp->setDataType("boolean");
     }
     temp->setID(this->generateID());
     temp->setData(n);
@@ -104,21 +105,18 @@ template <typename T>
 void LinkedList<T>::copyData(T* newData, T* oldData){
     Node<T>* temp = head;
     Node<T>* temp2 = head;
-    int id;
     while(temp != nullptr){
         if(temp->getMemDir() == newData){
             while(temp2->getMemDir()!=oldData){
                 temp2 = temp2->getNext();
             }
-            id = temp->getID();
-            temp2->setID(id);
-            temp2->setData(newData);
-            break;
+            temp->setReferences(temp->getReferences()+1);
+            temp2->setReferences(-1);
+            deleteRef(oldData);
+            return;
         }
         temp = temp->getNext();
     }
-    int cantRef = this->cantRef(newData);
-    updateCanRef(newData,cantRef);
 }
 
 //elimina un nodo que posea el dato removeData y al finalizar hace un conteo de cuales nodos poseen removeDate
@@ -127,75 +125,33 @@ template <typename T>
 void LinkedList<T>::deleteRef(T* removeData){
     auto* temp = new Node<T>;
     temp = this->head;
-    if(temp->getMemDir()==removeData){
-        if(temp->getReferences() == 1){
-            temp->setReferences(0);
+    while(temp!=nullptr){
+        if(temp->getMemDir() == removeData && temp->getReferences()>=1){
+            temp->setReferences(temp->getReferences()-1);
             return;
         }
-        else {
-            head = temp->getNext();
-            size--;
-            delete(temp);
-            int cantRef = this->cantRef(removeData);
-            updateCanRef(removeData,cantRef);
-        }
+        temp = temp->getNext();
+    }
+    temp = this->head;
+    if(temp->getMemDir()==removeData){
+        temp = temp->getNext();
+        head = temp;
     }
     else {
         while (temp != nullptr) {
             if (temp->getNext() == this->tail && temp->getNext()->getMemDir() == removeData) {
-                if(temp->getNext()->getReferences()==1){
-                    temp->getNext()->setReferences(0);
-                    break;
-                }
                 this->tail = temp;
                 tail->setNext(temp->getNext()->getNext());
-                size--;
-                int cantRef = this->cantRef(removeData);
-                updateCanRef(removeData,cantRef);
                 break;
             }
             if (temp->getNext()->getMemDir() == removeData) {
-                if(temp->getNext()->getReferences()==1){
-                    temp->getNext()->setReferences(0);
-                    break;
-                }
                 temp->setNext(temp->getNext()->getNext());
-                size--;
-                int cantRef = this->cantRef(removeData);
-                updateCanRef(removeData,cantRef);
                 break;
             }
             temp = temp->getNext();
         }
     }
-}
-
-//devuelve un int que indica la cantidad de nodos que poseen el valor de data
-template <typename T>
-int LinkedList<T>::cantRef(T *data) {
-    Node<T>* temp = head;
-    int ref=0;
-    while(temp != nullptr){
-        if(temp->getMemDir() == data){
-            ref++;
-        }
-        temp = temp->getNext();
-    }
-    return ref;
-}
-
-//actualiza la cantidad de referencias que tiene cada nodo
-//es decir si hay 3 nodos con el valor de data entonces a cada uno de esos nodos
-//se le asigna el valor de 3 referencias
-template <typename T>
-void LinkedList<T>::updateCanRef(T* data, int cantData){
-    Node<T>* temp = head;
-    while(temp != nullptr){
-        if(temp->getMemDir() == data){
-            temp->setReferences(cantData);
-        }
-        temp = temp->getNext();
-    }
+    size--;
 }
 
 template <typename T>
@@ -204,16 +160,13 @@ void LinkedList<T>::freeMemory(){
     if(temp->getReferences()==0){
         delete (temp->getMemDir());
         head = temp->getNext();
-        delete(temp);
         size--;
-        return;
     }
     else {
         while (temp->getNext()!= nullptr) {
             if (temp->getNext()->getReferences() == 0) {
-                delete temp->getNext()->getMemDir();
+                delete (temp->getNext()->getMemDir());
                 temp->setNext(temp->getNext()->getNext());
-                delete(temp);
                 size--;
                 break;
             }

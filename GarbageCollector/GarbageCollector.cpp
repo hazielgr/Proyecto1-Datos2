@@ -71,8 +71,8 @@ void run() {
         if(gbc->boolList.getSize()!=0){
             gbc->boolList.freeMemory();
         }
-        cout<<"liberando memoria"<<endl;
-        sleep(static_cast<unsigned int>(1));
+        //cout<<"liberando memoria"<<endl;
+        sleep(static_cast<unsigned int>(0.3));
     }
 }
 
