@@ -50,8 +50,6 @@ public:
 
     int getDataID(int* data);
 
-    bool searchID(int data);
-
 };
 
 #endif //GARBAGECOLLECTOR_GARBAGECOLLECTOR_H
