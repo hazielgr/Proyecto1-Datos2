@@ -71,7 +71,7 @@ template <typename T>
 void LinkedList<T>::display(){
     Node<T>* temp = head;
     while(temp != nullptr){
-        cout<<temp->getData()<<endl;
+        cout<<temp->getID()<<endl;
         temp = temp->getNext();
     }
 }
