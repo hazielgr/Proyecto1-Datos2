@@ -1,6 +1,11 @@
-//
-// Created by haziel on 26/5/20.
-//
+/**
+ *  @file VsPointer.h
+ *  @version 1.0
+ *  @date 11/05/2020
+ *  @author Mario Gudino
+ *  @title VsPointer
+ *  @brief Clase que define un nuevo tipo de puntero para almacenar datos mediante sobrecarga de operadores
+ */
 
 #ifndef VSPOINTER_VSPOINTER_H
 #define VSPOINTER_VSPOINTER_H
@@ -9,20 +14,57 @@
 #include "../GarbageCollector/GarbageCollector.h"
 using namespace std;
 
-
 template <typename T>
 class VsPointer {
 private:
     T* data;
 public:
+    /**
+     * @brief New metodo estatico para instanciar nuevos vspointers
+     * @return VsPointer
+     */
     static VsPointer<T> New();
+
+    /**
+     * @brief Sobrecarga de operador "=', copia la direccion de memoria
+     * @param newData VsPointer<T> el cual es copiado
+     * @return direccion de memoria del vspointer
+     */
     VsPointer& operator=(VsPointer<T> newData);
+
+    /**
+     * @brief Sobrecarga de operador = para asignar un nuevo dato
+     * @param newData Dato el cual es asignado
+     * @return direccion de memoria del vspointer
+     */
     VsPointer& operator=(T newData);
+
+    /**
+     * @brief Sobrecarga de operador * para asignar un nuevo dato
+     * @return direccion de memoria de T generico
+     */
     T& operator*();
+
+    /**
+     * @brief Sobrecarga de operador & para asignar un nuevo dato
+     * @return dato guardo en el vspointer
+     */
     T operator&();
+
+    /**
+     * @brief VsPointer Constructor de la clase VsPointer
+     */
     VsPointer();
+
+    /**
+     * @brief VsPointer Destructor de la clase VsPointer
+     */
     ~VsPointer();
-    void deletePtr();
+
+    /**
+     * @brief getTdata Se utiliza para obtener dato guardado generico guardo en puntero
+     * @return Puntero generico que almacena dato
+     */
     T* getTdata();
 };
 
@@ -32,7 +74,6 @@ VsPointer<T> VsPointer<T>::New() {
     return VsPointer();
 }
 
-//asigna memoria para el dato T* mediante new
 template <class T>
 VsPointer<T>::VsPointer() {
     this->data = new T;
@@ -40,7 +81,7 @@ VsPointer<T>::VsPointer() {
     gbC->addToList(this->data);
 }
 
-//sobrecarga operador * para poder asignar datos a la instancia
+
 template <class T>
 T& VsPointer<T>::operator*() {
     return *data;
@@ -51,7 +92,7 @@ T VsPointer<T>::operator&() {
     return *data;
 }
 
-//sobrecarga el operador "=" para igualar dos VsPointers, es decir hacer un copy de la primera instancia
+
 template <class T>
 VsPointer<T>& VsPointer<T>::operator=(VsPointer<T> newData) {
     GarbageCollector* gbC = GarbageCollector::getInstance();
@@ -70,12 +111,7 @@ VsPointer<T>::~VsPointer() {
     GarbageCollector* gbC = GarbageCollector::getInstance();
     gbC->deleteData(this->data);
      */
-}
 
-template <typename T>
-void VsPointer<T>::deletePtr() {
-    GarbageCollector* gbC = GarbageCollector::getInstance();
-    gbC->deleteData(this->data);
 }
 
 template <typename T>
