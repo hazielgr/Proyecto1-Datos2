@@ -26,6 +26,7 @@ public:
     void copyData(T* newData, T* oldData);
     void deleteRef(T* removeData);
     void freeMemory();
+    int getDataID(T* data);
 };
 
 template <typename T>
@@ -177,6 +178,17 @@ void LinkedList<T>::freeMemory(){
             }
             temp = temp->getNext();
         }
+    }
+}
+
+template <typename T>
+int LinkedList<T>::getDataID(T* data){
+    Node<T>* temp = head;
+    while(temp!= nullptr){
+        if(temp->getMemDir() == data){
+            return temp->getID();
+        }
+        temp = temp->getNext();
     }
 }
 

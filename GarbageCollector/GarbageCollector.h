@@ -43,5 +43,12 @@ public:
 
     void deleteData(int *removeData);
     thread thrd;
+
+    int getDataID(bool* data);
+
+    int getDataID(string* data);
+
+    int getDataID(int* data);
 };
+
 #endif //GARBAGECOLLECTOR_GARBAGECOLLECTOR_H

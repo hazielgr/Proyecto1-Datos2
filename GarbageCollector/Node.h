@@ -28,7 +28,6 @@ public:
     string getDataType();
     int getReferences();
     void setReferences(int newRef);
-    T* getTdata();
 };
 
 
@@ -39,7 +38,7 @@ T Node<T>::getData() {
 
 template <typename T>
 T* Node<T>::getMemDir() {
-    return &(*this->data);
+    return (this->data);
 }
 
 template <typename T>
@@ -85,11 +84,6 @@ void Node<T>::setReferences(int newRef) {
 template <typename T>
 int Node<T>::getReferences() {
     return this->references;
-}
-
-template <typename T>
-T* Node<T>::getTdata(){
-    return this->data;
 }
 
 #endif //GARBAGECOLLECTOR_NODE_H

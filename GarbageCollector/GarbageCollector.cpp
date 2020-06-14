@@ -76,3 +76,14 @@ void run() {
     }
 }
 
+int GarbageCollector::getDataID(bool* data) {
+    return this->boolList.getDataID(data);
+}
+
+int GarbageCollector::getDataID(string* data) {
+    return this->stringList.getDataID(data);
+}
+
+int GarbageCollector::getDataID(int* data) {
+    return this->intList.getDataID(data);
+}
