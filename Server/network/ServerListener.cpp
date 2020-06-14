@@ -1,15 +1,4 @@
-/**
- * @file ServerListener.cpp
- * @brief Defining server Network's Layer
- * @author Joseph Jimenez
- * @version 1.0
- */
 #include "ServerListener.h"
-/** @brief Starts the server
-  * @return m_socket the state of the socket
-  * This method creates a socket to listen for incoming connections
-  * needed to fill up the structure of the serverStructure
-  */
 int ServerListener::init(){
     m_socket = socket(AF_INET, SOCK_STREAM, 0);
     if(m_socket<=0) std::cerr << "ERROR. Can't create socket";
@@ -23,11 +12,6 @@ int ServerListener::init(){
     if(listen(m_socket,SOMAXCONN)==-1) std::cerr<<"Can't Listen!";
     return m_socket;
 }
-/** @brief Sends message to client
-  * @param clientSocket the client
-  * @param msg the message
-  * @param length size of message
-  */
 void ServerListener::sendToClient(int clientSocket, const char *msg, int length) {
     send(clientSocket, msg, length, 0);
 }

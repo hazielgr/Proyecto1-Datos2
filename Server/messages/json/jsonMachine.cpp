@@ -1,22 +1,15 @@
-#include <sstream>
 #include "jsonMachine.h"
-/**
- * @brief this methods creates VsPointer Objects from messages
- * @param DataType
- * @param Data
- * @param ID
- * @param References
- * @return true if was ok creating the VsPointerObject
- * @version 2.0
- */
+int Id;
 bool jsonMachine::create_Object(std::string DataType, std::string Data, std::string ID, std::string References) {
     if(DataType=="string"){
+        GarbageCollector*gbC = GarbageCollector::getInstance();
         VsPointer<string> myPtr = VsPointer<string>::New();
         *myPtr=Data;
         Id=gbC->getDataID(myPtr.getTdata());
         std::cout << "Created VSPointer<string>" << std::endl;
         return true;
     }else if(DataType=="int"){
+        GarbageCollector*gbC = GarbageCollector::getInstance();
         VsPointer<int> myPtr = VsPointer<int>::New();
         int dataInt=std::stoi( Data );
         *myPtr=dataInt;
@@ -24,6 +17,7 @@ bool jsonMachine::create_Object(std::string DataType, std::string Data, std::str
         std::cout << "Creating VSPointer<int>" << std::endl;
         return true;
     }else if(DataType=="bool"){
+        GarbageCollector*gbC = GarbageCollector::getInstance();
         VsPointer<bool> myPtr = VsPointer<bool>::New();
         bool b;
         std::istringstream is(Data);
@@ -36,18 +30,13 @@ bool jsonMachine::create_Object(std::string DataType, std::string Data, std::str
         return false;
     }
 }
-/**
- * Reads On this method can handle String with json structure
- * @param giveMeString
- * @return true if could deserialize
- */
 int jsonMachine::Deserialize(std::basic_string<char> giveMeString ) {
     Json::Value root;
     Json::Reader reader;
     std::cout << giveMeString << std::endl;
     bool parsingSuccessful = reader.parse(giveMeString.c_str(), root);
     if (!parsingSuccessful) {
-        std::cout << "DataNoParceble" << std::endl;
+        std::cout << "DataNoParceable" << std::endl;
         return 0;
     } else {
         for (Json::Value::const_iterator i = root.begin(); i != root.end(); i++) {
@@ -64,12 +53,6 @@ int jsonMachine::Deserialize(std::basic_string<char> giveMeString ) {
     }
     return 0;
 }
-/**
- *@brief this methods receive a single pointer and return  string JSON
- *@param pointer receive a VsPointer<String>
- *@return output
- * @version 2.0
- */
 std::string jsonMachine::enCode(Node<basic_string<char>>* nodo) {
     Json::Value save;
     Json::FastWriter fastWriter;
@@ -83,12 +66,6 @@ std::string jsonMachine::enCode(Node<basic_string<char>>* nodo) {
     std::cout<< output;
     return output;
 }
-/**
- *@brief this methods receive a single pointer and return  string JSON
- *@param pointer receive a VsPointer<int>
- *@return output
- * @version 2.0
- */
 std::string jsonMachine::enCode(Node<int>* nodo) {
     Json::Value save;
     Json::FastWriter fastWriter;
@@ -102,12 +79,6 @@ std::string jsonMachine::enCode(Node<int>* nodo) {
     std::cout<< output;
     return output;
 }
-/**
- *@brief this methods receive a single pointer and return  string JSON
- *@param pointer receive a VsPointer<bool>
- *@return output
- * @version 2.0
- */
 std::string jsonMachine::enCode(Node<bool>* nodo) {
     Json::Value save;
     Json::FastWriter fastWriter;

@@ -1,3 +1,12 @@
+/**
+ *  @file LinkedList.h
+ *  @version 1.0
+ *  @date 11/05/2020
+ *  @author Mario Gudino
+ *  @title LinkedList
+ *  @brief Estructura dinamica que utiliz nodo para almacenar datos
+ */
+
 #ifndef VSPOINTER_LINKEDLIST_H
 #define VSPOINTER_LINKEDLIST_H
 #include "Node.h"
@@ -11,16 +20,61 @@ private:
     int size;
     int ids[1000];
 public:
+    /**
+     * @brief contructor de la clase LinkedList
+     */
     LinkedList();
+    /**
+     * @brief addNode agrega un nuevo nodo a la lista
+     * @param n Puntero con dato generico
+     */
     void addNode(T* n);
+    /**
+     * @brief display imprime los datos de la lista
+     */
     void display();
+    /**
+     * @brief getSize MUestra el tamano de la lista
+     * @return int tamano de lista
+     */
     int getSize();
+    /**
+     * @brief generateID Genera un int aleatorio que no se repite
+     * @return int aleatorio
+     */
     int generateID();
+    /**
+     * @brief copyData Cambia los datos de un nodo especifico, el nodo que tenga guardado en puntero *oldData es sustituido por *newData
+     * @param newData Nuevo puntero que se asigna
+     * @param oldData Viejo puntero el cual es remplazado
+     */
     void copyData(T* newData, T* oldData);
+    /**
+     * @brief deleteRef elimina el nodo que tenga el puntero T*
+     * @param removeData Puntero para idenficar el nodo a eliminar
+     */
     void deleteRef(T* removeData);
+    /**
+    * @brief freeMemory Libera todos los espacios de memoria que no se estan utilizando
+    */
     void freeMemory();
+    /**
+     * @brief getDataID retorna id del nodo que posea en punteto T*
+     * @param data puntero para encontrar el nodo deseado
+     * @return nt que indica el id
+     */
     int getDataID(T* data);
+    /**
+     * @brief getNodeID Obtiene un nodo mediante un int que es un identificador de dicho nodo
+     * @param id int que indica el identificador
+     * @return Node que posea el int id ingresado
+     */
     Node<T>* getNodeID(int id);
+    /**
+     * @brief searchID Regresa un bool que indica si alguno de los nodos posee el id ingresado
+     * @param id int que indica el identificador del nodo a buscar
+     * @return bool que inidica si se encuentra el nodo
+     */
     bool searchID(int id);
 };
 template <typename T>

@@ -1,3 +1,11 @@
+/**
+ *  @file VsPointer.h
+ *  @version 1.0
+ *  @date 11/05/2020
+ *  @author Mario Gudino
+ *  @title VsPointer
+ *  @brief Clase que define un nuevo tipo de puntero para almacenar datos mediante sobrecarga de operadores
+ */
 #ifndef VSPOINTER_VSPOINTER_H
 #define VSPOINTER_VSPOINTER_H
 #include <iostream>
@@ -7,14 +15,46 @@ class VsPointer {
 private:
     T* data;
 public:
+    /**
+     * @brief New metodo estatico para instanciar nuevos vspointers
+     * @return VsPointer
+     */
     static VsPointer<T> New();
+    /**
+     * @brief Sobrecarga de operador "=', copia la direccion de memoria
+     * @param newData VsPointer<T> el cual es copiado
+     * @return direccion de memoria del vspointer
+     */
     VsPointer& operator=(VsPointer<T> newData);
+    /**
+     * @brief Sobrecarga de operador = para asignar un nuevo dato
+     * @param newData Dato el cual es asignado
+     * @return direccion de memoria del vspointer
+     */
     VsPointer& operator=(T newData);
+    /**
+     * @brief Sobrecarga de operador * para asignar un nuevo dato
+     * @return direccion de memoria de T generico
+     */
     T& operator*();
+    /**
+     * @brief Sobrecarga de operador & para asignar un nuevo dato
+     * @return dato guardo en el vspointer
+     */
     T operator&();
+    /**
+     * @brief VsPointer Constructor de la clase VsPointer
+     */
     VsPointer();
+    /**
+     * @brief VsPointer Destructor de la clase VsPointer
+     */
     ~VsPointer();
     void deletePtr();
+    /**
+     * @brief getTdata Se utiliza para obtener dato guardado generico guardo en puntero
+     * @return Puntero generico que almacena dato
+     */
     T* getTdata();
 };
 template <class T>
