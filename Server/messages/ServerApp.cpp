@@ -2,13 +2,10 @@
  * @file ServerApp.cpp
  * @brief Handling incoming connections messages
  * @author Joseph Jimenez
- * @version 2.0
+ * @version 3.0
  */
-#include <fstream>
 #include "ServerApp.h"
-#include "json/jsonMachine.h"
-#include <crypto++/hex.h>
-#include <crypto++/md5.h>
+void start();
 /** @brief handles connection with client
   * @return Successful state
   * When the server's init, will try to accepts the connection
@@ -18,34 +15,25 @@ int ServerApp::run() {
     bool security = true;
     bool running = true;
     while (running) {
-        //Conecta al Ciente
+        gbC = GarbageCollector::getInstance();
+        thread thd(start);
+        gbC->thrd.join();
+        thd.join();
         int client = accept(m_socket, (struct sockaddr *) &client_addr, &clientSize);
-        //Envia un mensaje que confirma comunicacion
         onClientConnected(client);
-        VsPointer<string> myPtr = VsPointer<string>::New();
-        *myPtr = "Haziel";
-        std::string pointerOne =jsonMachine::enCode(myPtr);
-        //Al recibir un mensaje
         int bytesReceived;
         do{
-            Data= pointerOne;
             char buffer[4096];
-            memset(buffer, 0,4096); //space for the bytes received
+            memset(buffer, 0,4096);
             bytesReceived=recv(client,buffer, 4096,0);
-            //Si el mensaje es un error -1
             if(bytesReceived<0){
                 close(m_socket);
                 std::cout<< "Bytes Received Error";
             }else{
-                //Un mensaje correcto procede a revisar si ya envio el password del server, sino pasa al manejador de mensajes
                 if(security==true){
                     if(onPasswordReceived(client,buffer,bytesReceived)==1) {
                         security = false;
-                        //Enviando mensaje de LogIn correcto
-                        sendLoginOk(client);
-                    }else{
-                        //Enviando mensaje LogIn incorrecto
-                        sendLoginBad(client);}
+                    }else{}
                 }else{
                     onMessageReceived(client,buffer,bytesReceived);
                 }
@@ -62,21 +50,27 @@ int ServerApp::run() {
 void ServerApp::onClientConnected(int clientSocket){
     sendToClient(clientSocket, confirm.c_str(), confirm.size() + 1);
 }
-void ServerApp::sendLoginOk(int clientSocket) {
-    sendToClient(clientSocket, loginOk.c_str(), loginOk.size() + 1);
-}
-void ServerApp::sendLoginBad(int clientSocket) {
-    sendToClient(clientSocket, loginBad.c_str(), loginBad.size() + 1);
-}
+/**
+ * @brief If cant handle data, sus sendId back
+ * @param clientSocket client connected
+ */
 void ServerApp::sendMessage(int clientSocket,const char* msg, int length) {
     sendToClient(clientSocket, msg, length + 1);
 }
+/**
+ * @brief Sends a message with Data specified
+ * @param clientSocket client connected
+ */
 void ServerApp::receivedID(int clientSocket) {
     sendToClient(clientSocket, Data.c_str(), Data.size() + 1);
-
 }
+/**
+ * @brief Sends a message with ID generated
+ * @param clientSocket client connected
+ */
 void ServerApp::receivedData(int clientSocket){
-    sendToClient(clientSocket, IDTest.c_str(), IDTest.size() + 1);
+    std::string IDtoSend=to_string(ID);
+    sendToClient(clientSocket, IDtoSend.c_str(),IDtoSend.size() + 1);
 }
 /**
  * @brief Handles the login to the server
@@ -115,14 +109,30 @@ int ServerApp::onPasswordReceived(int clientSocket, const char* msg, int length)
     }
 }
 /**
+ * @brief Lools if it can finds an ID with that msg
+ * @param msg
+ */
+bool ServerApp::isThisID(const char* msg){
+    VsPointer<int> myptr=VsPointer<int>::New();
+    int dataInt=std::stoi( msg );
+    myptr=dataInt;
+    //Buscar si es un ID
+   /* if(ID=gbC->getDataID(myptr.getData())){
+        //Si es un ID hacer enCode(VsPointerconEseID)
+        //Cambiar Data con ese Encode
+        return true;
+    }
+    std::cout << "This is not an ID" << std::endl;
+    return false;*/
+}
+/**
  * @brief handles Messages received by bytesReceived
  * @param clientSocket
  * @param msg
  * @param length
  */
 int ServerApp::onMessageReceived(int clientSocket, const char* msg, int length) {
-    std::string messageString= msg;
-    if(messageString==IDTest){
+    if(isThisID(msg)){
         std::cout << "ID Recon"<< std::endl;
         receivedID(clientSocket);
         return 0;
@@ -131,7 +141,6 @@ int ServerApp::onMessageReceived(int clientSocket, const char* msg, int length) 
         receivedData(clientSocket) ;
         return 0;
     }else{
-        //Si recibe un mensaje que no es un ID o un tipo de mensaje Deserealizable, imprime y envia el mensaje recibido
         printf("-->%s\n", msg);
         sendMessage(clientSocket,msg,length);
         return 0;

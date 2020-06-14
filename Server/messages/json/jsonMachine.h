@@ -3,7 +3,7 @@
 #include <jsoncpp/json/json.h>
 #include <iostream>
 #include <jsoncpp/json/value.h>
-#include "VsPointer.h"
+#include "../GarbageCollector/VsPointer.h"
 /**
  * @file jsonMachine.h
  * @brief Handles json changes
@@ -13,9 +13,9 @@
 class jsonMachine{
 public:
     static bool Deserialize(std::basic_string<char> giveMeStream );
-    static std::string enCode(VsPointer<std::string> pointer);
-    static std::string enCode(VsPointer<int> pointer);
-    static std::string enCode(VsPointer<bool> pointer);
+    static std::string enCode(Node<string>* nodo);
+    static std::string enCode(Node<int>* nodo);
+    static std::string enCode(Node<bool>* nodo)  ;
     static bool create_Object( std::string DataType, std::string Data,  std::string ID, std::string References);
 private:
     jsonMachine(void){};

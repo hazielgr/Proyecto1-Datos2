@@ -6,22 +6,18 @@
  * @param Data
  * @param ID
  * @param References
- * @return true if was ok creating the Object
- * @version 1.0
+ * @return true if was ok creating the VsPointerObject
+ * @version 2.0
  */
 bool jsonMachine::create_Object(std::string DataType, std::string Data, std::string ID, std::string References) {
     if(DataType=="string"){
         VsPointer<string> myPtr = VsPointer<string>::New();
         *myPtr=Data;
-        std::cout << myPtr.getData() << std::endl;
-        std::cout << myPtr.getType() << std::endl;
         std::cout << "Created VSPointer<string>" << std::endl;
     }else if(DataType=="int"){
         VsPointer<int> myPtr = VsPointer<int>::New();
         int dataInt=std::stoi( Data );
         *myPtr=dataInt;
-        std::cout << myPtr.getData() << std::endl;
-        std::cout << myPtr.getType() << std::endl;
         std::cout << "Creating VSPointer<int>" << std::endl;
     }else if(DataType=="bool"){
         VsPointer<bool> myPtr = VsPointer<bool>::New();
@@ -29,8 +25,6 @@ bool jsonMachine::create_Object(std::string DataType, std::string Data, std::str
         std::istringstream is(Data);
         is >> std::boolalpha >> b;
         *myPtr=b;
-        std::cout << myPtr.getData() << std::endl;
-        std::cout << myPtr.getType() << std::endl;
         std::cout << "Creating VSPointer<bool>" << std::endl;
     }else{
         return false;
@@ -69,15 +63,15 @@ bool jsonMachine::Deserialize(std::basic_string<char> giveMeString ){
  *@brief this methods receive a single pointer and return  string JSON
  *@param pointer receive a VsPointer<String>
  *@return output
- * @version 1.0
+ * @version 2.0
  */
-std::string jsonMachine::enCode(VsPointer<string> pointer) {
+std::string jsonMachine::enCode(Node<string>* nodo) {
     Json::Value save;
     Json::FastWriter fastWriter;
-    save["ID"]="ID";
-    save["Referencess"]=3;
-    save["DataType"]=pointer.getType();
-    save["Data"]=pointer.getData();
+    save["ID"]=nodo->getID();
+    save["References"]=nodo->getReferences();
+    save["Data"]=nodo->getData();
+    save["DataType"]=nodo->getDataType();
     Json::StyledWriter styledWriter;
     std::cout << styledWriter.write(save);
     std::string output = fastWriter.write(save);
@@ -88,15 +82,15 @@ std::string jsonMachine::enCode(VsPointer<string> pointer) {
  *@brief this methods receive a single pointer and return  string JSON
  *@param pointer receive a VsPointer<int>
  *@return output
- * @version 1.0
+ * @version 2.0
  */
-std::string jsonMachine::enCode(VsPointer<int> pointer) {
+std::string jsonMachine::enCode(Node<int>* nodo) {
     Json::Value save;
     Json::FastWriter fastWriter;
-    save["ID"]="ID";
-    save["Referencess"]=3;
-    save["DataType"]=pointer.getType();
-    save["Data"]=pointer.getData();
+    save["ID"]=nodo->getID();
+    save["References"]=nodo->getReferences();
+    save["Data"]=nodo->getData();
+    save["DataType"]=nodo->getDataType();
     Json::StyledWriter styledWriter;
     std::cout << styledWriter.write(save);
     std::string output = fastWriter.write(save);
@@ -107,15 +101,15 @@ std::string jsonMachine::enCode(VsPointer<int> pointer) {
  *@brief this methods receive a single pointer and return  string JSON
  *@param pointer receive a VsPointer<bool>
  *@return output
- * @version 1.0
+ * @version 2.0
  */
-std::string jsonMachine::enCode(VsPointer<bool> pointer) {
+std::string jsonMachine::enCode(Node<bool>* nodo) {
     Json::Value save;
     Json::FastWriter fastWriter;
-    save["ID"]="ID";
-    save["Referencess"]=3;
-    save["DataType"]=pointer.getType();
-    save["Data"]=pointer.getData();
+    save["ID"]=nodo->getID();
+    save["References"]=nodo->getReferences();
+    save["Data"]=nodo->getData();
+    save["DataType"]=nodo->getDataType();
     Json::StyledWriter styledWriter;
     std::cout << styledWriter.write(save);
     std::string output = fastWriter.write(save);

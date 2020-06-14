@@ -27,7 +27,7 @@ public:
  * @param port
  * @param password
  */
-    ServerListener(const char* ipAddress, int port, const char* password) : m_ipAddress(ipAddress), m_port(port), m_password(password) { }
+        ServerListener(const char* ipAddress, int port, const char* password) : m_ipAddress(ipAddress), m_port(port), m_password(password) { }
     int init();
 protected:
     void sendToClient(int clientSocket, const char* msg, int length);
