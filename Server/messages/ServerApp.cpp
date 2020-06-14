@@ -113,17 +113,26 @@ int ServerApp::onPasswordReceived(int clientSocket, const char* msg, int length)
  * @param msg
  */
 bool ServerApp::isThisID(const char* msg){
-    VsPointer<int> myptr=VsPointer<int>::New();
     int dataInt=std::stoi( msg );
-    myptr=dataInt;
-    //Buscar si es un ID
-   /* if(ID=gbC->getDataID(myptr.getData())){
-        //Si es un ID hacer enCode(VsPointerconEseID)
-        //Cambiar Data con ese Encode
+    if(gbC->intList.searchID(dataInt)){
+        Data=jsonMachine::enCode(gbC->intList.getNodeID(dataInt));
+        return true;
+    }else if(gbC->stringList.searchID(dataInt)){
+        Data= jsonMachine::enCode(gbC->stringList.getNodeID(dataInt));
+        return true;
+    }else if(gbC->boolList.searchID(dataInt)){
+        Data=jsonMachine::enCode(gbC->boolList.getNodeID(dataInt));
         return true;
     }
     std::cout << "This is not an ID" << std::endl;
-    return false;*/
+    return false;
+}
+bool ServerApp::isThisSerializable(const char *msg) {
+    if(ID=jsonMachine::Deserialize(msg)){
+        return true;
+    }else{
+        return false;
+    }
 }
 /**
  * @brief handles Messages received by bytesReceived
@@ -136,8 +145,8 @@ int ServerApp::onMessageReceived(int clientSocket, const char* msg, int length) 
         std::cout << "ID Recon"<< std::endl;
         receivedID(clientSocket);
         return 0;
-    }else if( jsonMachine::Deserialize(msg)) {
-        std::cout << msg<< std::endl;
+    }else if(isThisSerializable(msg)) {
+        std::cout << "Serializable Recon"<< std::endl;
         receivedData(clientSocket) ;
         return 0;
     }else{

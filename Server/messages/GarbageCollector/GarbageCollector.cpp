@@ -1,5 +1,7 @@
+#include <iostream>
+#include <thread>
+#include <unistd.h>
 #include "GarbageCollector.h"
-using namespace std;
 void run();
 GarbageCollector* GarbageCollector::instance = 0;
 GarbageCollector::GarbageCollector(){
@@ -7,10 +9,8 @@ GarbageCollector::GarbageCollector(){
     this->thrd = thread(run);
 }
 GarbageCollector* GarbageCollector::getInstance(){
-    if (instance == 0)
-    {
+    if (instance == 0){
         instance = new GarbageCollector();
-
     }
     return instance;
 }
@@ -23,6 +23,7 @@ void GarbageCollector::addToList(string* data) {
 void GarbageCollector::addToList(bool* data) {
     this->boolList.addNode(data);
 }
+
 void GarbageCollector::copyRef(int* newData, int* oldData) {
     this->intList.copyData(newData,oldData);
 }
@@ -53,8 +54,8 @@ void run() {
         if(gbc->boolList.getSize()!=0){
             gbc->boolList.freeMemory();
         }
-        cout<<"liberando memoria"<<endl;
-        sleep(static_cast<unsigned int>(1));
+        //cout<<"liberando memoria"<<endl;
+        sleep(static_cast<unsigned int>(0.3));
     }
 }
 int GarbageCollector::getDataID(bool* data) {

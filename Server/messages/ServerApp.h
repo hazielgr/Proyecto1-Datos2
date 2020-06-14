@@ -25,12 +25,13 @@ class ServerApp : public ServerListener{
 public:
     ServerApp(const char* ipAddress, int port,const char* password ) : ServerListener(ipAddress, port, password) { }
     int run();
-    GarbageCollector* gbC;
     int ID;
     std::string Data;
+    GarbageCollector* gbC;
     std::string confirm = "Connected Successful, I can read your messages \r\n";
 protected:
     virtual bool isThisID(const char* msg);
+    virtual bool isThisSerializable(const char* msg);
     virtual int onMessageReceived(int clientSocket, const char* msg, int length);
     virtual int onPasswordReceived(int clientSocket, const char* msg, int length);
     virtual void sendMessage(int clientSocket,const char* msg, int length);

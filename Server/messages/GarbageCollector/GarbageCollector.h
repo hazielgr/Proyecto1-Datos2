@@ -2,10 +2,6 @@
 #define GARBAGECOLLECTOR_GARBAGECOLLECTOR_H
 #include "LinkedList.h"
 #include <thread>
-#include <iostream>
-#include <thread>
-#include <unistd.h>
-using namespace std;
 class GarbageCollector {
 private:
     static GarbageCollector *instance;

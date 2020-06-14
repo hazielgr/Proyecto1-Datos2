@@ -20,6 +20,8 @@ public:
     void deleteRef(T* removeData);
     void freeMemory();
     int getDataID(T* data);
+    Node<T>* getNodeID(int id);
+    bool searchID(int id);
 };
 template <typename T>
 LinkedList<T>::LinkedList() {
@@ -57,7 +59,7 @@ template <typename T>
 void LinkedList<T>::display(){
     Node<T>* temp = head;
     while(temp != nullptr){
-        cout<<temp->getData()<<endl;
+        cout<<temp->getID()<<endl;
         temp = temp->getNext();
     }
 }
@@ -163,5 +165,26 @@ int LinkedList<T>::getDataID(T* data){
         }
         temp = temp->getNext();
     }
+}
+template <typename T>
+Node<T>* LinkedList<T>::getNodeID(int id){
+    Node<T>* temp = head;
+    while(temp!= nullptr){
+        if(temp->getID() == id){
+            return temp;
+        }
+        temp = temp->getNext();
+    }
+}
+template <typename T>
+bool LinkedList<T>::searchID(int id){
+    Node<T>* temp = head;
+    while(temp!= nullptr){
+        if(temp->getID() == id){
+            return true;
+        }
+        temp = temp->getNext();
+    }
+    return false;
 }
 #endif //VSPOINTER_LINKEDLIST_H
