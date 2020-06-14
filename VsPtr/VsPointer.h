@@ -23,6 +23,7 @@ public:
     VsPointer();
     ~VsPointer();
     void deletePtr();
+    T* getTdata();
 };
 
 
@@ -57,6 +58,7 @@ VsPointer<T>& VsPointer<T>::operator=(VsPointer<T> newData) {
     gbC->copyRef(newData.data, this->data);
     this->data = newData.data;
 }
+
 template <class T>
 VsPointer<T>& VsPointer<T>::operator=(T newData) {
     *this->data = newData;
@@ -76,4 +78,8 @@ void VsPointer<T>::deletePtr() {
     gbC->deleteData(this->data);
 }
 
+template <typename T>
+T* VsPointer<T>::getTdata() {
+    return this->data;
+}
 #endif //VSPOINTER_VSPOINTER_H
