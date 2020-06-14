@@ -49,6 +49,9 @@ public:
     int getDataID(string* data);
 
     int getDataID(int* data);
+
+    bool searchID(int data);
+
 };
 
 #endif //GARBAGECOLLECTOR_GARBAGECOLLECTOR_H

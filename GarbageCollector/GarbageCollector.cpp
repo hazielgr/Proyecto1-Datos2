@@ -87,3 +87,14 @@ int GarbageCollector::getDataID(string* data) {
 int GarbageCollector::getDataID(int* data) {
     return this->intList.getDataID(data);
 }
+
+bool GarbageCollector::searchID(int data) {
+    if(intList.searchID(data)){
+        return true;
+    }
+    else if(stringList.searchID(data)){
+        return true;
+    }
+    else return boolList.searchID(data);
+}
+
