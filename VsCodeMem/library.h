@@ -1,0 +1,6 @@
+#ifndef VSCODEMEM_LIBRARY_H
+#define VSCODEMEM_LIBRARY_H
+
+void hello();
+
+#endif //VSCODEMEM_LIBRARY_H
