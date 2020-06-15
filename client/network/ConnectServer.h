@@ -26,7 +26,7 @@ private:
     std::string           m_ipAddress;        /// IPAddress of server="127.0.0.1"
     int                   m_port;             /// Port for server use= 54000
 protected:
-    int sock;
+    int                   sock;
     sockaddr_in           client_addr;
 };
 

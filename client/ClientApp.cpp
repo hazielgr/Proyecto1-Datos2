@@ -9,6 +9,7 @@
 #include <unistd.h>
 #include "ClientApp.h"
 #include "JSON/jsonSerialize.h"
+#include "VsPointer.h"
 
 /** @brief handles connection with client
   * @return Successful state
@@ -23,15 +24,10 @@ int ClientApp::run() {
         if(connectResponse==-1)std::cerr<< "Error.Connecting server socket ";
         int bytesReceived;
         char buf[4096];
-        //Creamos Pointers de prueba para enviar la Data
         std::string userInput;
-        VsPointer<string> myPtr = VsPointer<string>::New();
-        *myPtr = "Haziel";
-        std::string pointerOne =jsonSerialize::enCode(myPtr);
         //Enviamos el password directamente
         sendPassword(sock);
         do{
-            Data= pointerOne;
             // Prompt the user for some text
             getline(std::cin, userInput);
             //Mientras el usuario escriba y logre un input >0
@@ -100,4 +96,3 @@ int ClientApp::onMessageReceived(int serverSocket, const char* msg, int length) 
         return 1;
     }
 }
-
