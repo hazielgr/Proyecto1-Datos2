@@ -1,0 +1,245 @@
+\hypertarget{class_linked_list}{}\section{Linked\+List$<$ T $>$ Class Template Reference}
+\label{class_linked_list}\index{Linked\+List$<$ T $>$@{Linked\+List$<$ T $>$}}
+
+
+Estructura dinamica que utiliz nodo para almacenar datos.  
+
+
+
+
+{\ttfamily \#include $<$Linked\+List.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_linked_list_a3c20fcfec867e867f541061a09fc640c}{Linked\+List} ()
+\begin{DoxyCompactList}\small\item\em contructor de la clase \hyperlink{class_linked_list}{Linked\+List} \end{DoxyCompactList}\item 
+void \hyperlink{class_linked_list_ad4624e0abf07930148dbc6d01fa72e46}{add\+Node} (T $\ast$n)
+\begin{DoxyCompactList}\small\item\em add\+Node agrega un nuevo nodo a la lista \end{DoxyCompactList}\item 
+void \hyperlink{class_linked_list_ab43bd594a0f7f9ff21c96370da575693}{display} ()
+\begin{DoxyCompactList}\small\item\em display imprime los datos de la lista \end{DoxyCompactList}\item 
+int \hyperlink{class_linked_list_ab56d59b74c8d24cd223a4a49a2b5cfb1}{get\+Size} ()
+\begin{DoxyCompactList}\small\item\em get\+Size M\+Uestra el tamano de la lista \end{DoxyCompactList}\item 
+int \hyperlink{class_linked_list_a0132c7cb9ac724af205c892281e8303f}{generate\+ID} ()
+\begin{DoxyCompactList}\small\item\em generate\+ID Genera un int aleatorio que no se repite \end{DoxyCompactList}\item 
+void \hyperlink{class_linked_list_a97f549fc2d43b889127273012fbfe7fa}{copy\+Data} (T $\ast$new\+Data, T $\ast$old\+Data)
+\begin{DoxyCompactList}\small\item\em copy\+Data Cambia los datos de un nodo especifico, el nodo que tenga guardado en puntero $\ast$old\+Data es sustituido por $\ast$new\+Data \end{DoxyCompactList}\item 
+void \hyperlink{class_linked_list_aa533ed600752a31abb17b0482e7c10c9}{delete\+Ref} (T $\ast$remove\+Data)
+\begin{DoxyCompactList}\small\item\em delete\+Ref elimina el nodo que tenga el puntero T$\ast$ \end{DoxyCompactList}\item 
+void \hyperlink{class_linked_list_a20857deefa26cdb553b7a5d8b706d84c}{free\+Memory} ()
+\begin{DoxyCompactList}\small\item\em free\+Memory Libera todos los espacios de memoria que no se estan utilizando \end{DoxyCompactList}\item 
+int \hyperlink{class_linked_list_a4e8d22209f9025284799c0212227e8a2}{get\+Data\+ID} (T $\ast$data)
+\begin{DoxyCompactList}\small\item\em get\+Data\+ID retorna id del nodo que posea en punteto T$\ast$ \end{DoxyCompactList}\item 
+\hyperlink{class_node}{Node}$<$ T $>$ \hyperlink{class_linked_list_aaf96dde647086d4370cd0b75024c1603}{get\+Node\+ID} (int id)
+\begin{DoxyCompactList}\small\item\em get\+Node\+ID Obtiene un nodo mediante un int que es un identificador de dicho nodo \end{DoxyCompactList}\item 
+bool \hyperlink{class_linked_list_ab607f61fa0222605f6f6dd794555e592}{search\+ID} (int id)
+\begin{DoxyCompactList}\small\item\em search\+ID Regresa un bool que indica si alguno de los nodos posee el id ingresado \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_node}{Node}$<$ T $>$ $\ast$ \hyperlink{class_linked_list_a35e09287e2d2943707b011208e7a8ed2}{head}
+\item 
+\hyperlink{class_node}{Node}$<$ T $>$ $\ast$ \hyperlink{class_linked_list_a428d620b6c645b408e0d6afd30335f63}{tail}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename T$>$\newline
+class Linked\+List$<$ T $>$}
+
+Estructura dinamica que utiliz nodo para almacenar datos. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_linked_list_a3c20fcfec867e867f541061a09fc640c}\label{class_linked_list_a3c20fcfec867e867f541061a09fc640c}} 
+\index{Linked\+List@{Linked\+List}!Linked\+List@{Linked\+List}}
+\index{Linked\+List@{Linked\+List}!Linked\+List@{Linked\+List}}
+\subsubsection{\texorpdfstring{Linked\+List()}{LinkedList()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\hyperlink{class_linked_list}{Linked\+List}$<$ T $>$\+::\hyperlink{class_linked_list}{Linked\+List} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+contructor de la clase \hyperlink{class_linked_list}{Linked\+List} 
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_linked_list_ad4624e0abf07930148dbc6d01fa72e46}\label{class_linked_list_ad4624e0abf07930148dbc6d01fa72e46}} 
+\index{Linked\+List@{Linked\+List}!add\+Node@{add\+Node}}
+\index{add\+Node@{add\+Node}!Linked\+List@{Linked\+List}}
+\subsubsection{\texorpdfstring{add\+Node()}{addNode()}}
+{\footnotesize\ttfamily template$<$typename T$>$ \\
+void \hyperlink{class_linked_list}{Linked\+List}$<$ T $>$\+::add\+Node (\begin{DoxyParamCaption}\item[{T $\ast$}]{n }\end{DoxyParamCaption})}
+
+
+
+add\+Node agrega un nuevo nodo a la lista 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & Puntero con dato generico \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_linked_list_a97f549fc2d43b889127273012fbfe7fa}\label{class_linked_list_a97f549fc2d43b889127273012fbfe7fa}} 
+\index{Linked\+List@{Linked\+List}!copy\+Data@{copy\+Data}}
+\index{copy\+Data@{copy\+Data}!Linked\+List@{Linked\+List}}
+\subsubsection{\texorpdfstring{copy\+Data()}{copyData()}}
+{\footnotesize\ttfamily template$<$typename T$>$ \\
+void \hyperlink{class_linked_list}{Linked\+List}$<$ T $>$\+::copy\+Data (\begin{DoxyParamCaption}\item[{T $\ast$}]{new\+Data,  }\item[{T $\ast$}]{old\+Data }\end{DoxyParamCaption})}
+
+
+
+copy\+Data Cambia los datos de un nodo especifico, el nodo que tenga guardado en puntero $\ast$old\+Data es sustituido por $\ast$new\+Data 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Data} & Nuevo puntero que se asigna \\
+\hline
+{\em old\+Data} & Viejo puntero el cual es remplazado \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_linked_list_aa533ed600752a31abb17b0482e7c10c9}\label{class_linked_list_aa533ed600752a31abb17b0482e7c10c9}} 
+\index{Linked\+List@{Linked\+List}!delete\+Ref@{delete\+Ref}}
+\index{delete\+Ref@{delete\+Ref}!Linked\+List@{Linked\+List}}
+\subsubsection{\texorpdfstring{delete\+Ref()}{deleteRef()}}
+{\footnotesize\ttfamily template$<$typename T$>$ \\
+void \hyperlink{class_linked_list}{Linked\+List}$<$ T $>$\+::delete\+Ref (\begin{DoxyParamCaption}\item[{T $\ast$}]{remove\+Data }\end{DoxyParamCaption})}
+
+
+
+delete\+Ref elimina el nodo que tenga el puntero T$\ast$ 
+
+
+\begin{DoxyParams}{Parameters}
+{\em remove\+Data} & Puntero para idenficar el nodo a eliminar \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_linked_list_ab43bd594a0f7f9ff21c96370da575693}\label{class_linked_list_ab43bd594a0f7f9ff21c96370da575693}} 
+\index{Linked\+List@{Linked\+List}!display@{display}}
+\index{display@{display}!Linked\+List@{Linked\+List}}
+\subsubsection{\texorpdfstring{display()}{display()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \hyperlink{class_linked_list}{Linked\+List}$<$ T $>$\+::display (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+display imprime los datos de la lista 
+
+\mbox{\Hypertarget{class_linked_list_a20857deefa26cdb553b7a5d8b706d84c}\label{class_linked_list_a20857deefa26cdb553b7a5d8b706d84c}} 
+\index{Linked\+List@{Linked\+List}!free\+Memory@{free\+Memory}}
+\index{free\+Memory@{free\+Memory}!Linked\+List@{Linked\+List}}
+\subsubsection{\texorpdfstring{free\+Memory()}{freeMemory()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \hyperlink{class_linked_list}{Linked\+List}$<$ T $>$\+::free\+Memory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+free\+Memory Libera todos los espacios de memoria que no se estan utilizando 
+
+\mbox{\Hypertarget{class_linked_list_a0132c7cb9ac724af205c892281e8303f}\label{class_linked_list_a0132c7cb9ac724af205c892281e8303f}} 
+\index{Linked\+List@{Linked\+List}!generate\+ID@{generate\+ID}}
+\index{generate\+ID@{generate\+ID}!Linked\+List@{Linked\+List}}
+\subsubsection{\texorpdfstring{generate\+I\+D()}{generateID()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+int \hyperlink{class_linked_list}{Linked\+List}$<$ T $>$\+::generate\+ID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+generate\+ID Genera un int aleatorio que no se repite 
+
+\begin{DoxyReturn}{Returns}
+int aleatorio 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_linked_list_a4e8d22209f9025284799c0212227e8a2}\label{class_linked_list_a4e8d22209f9025284799c0212227e8a2}} 
+\index{Linked\+List@{Linked\+List}!get\+Data\+ID@{get\+Data\+ID}}
+\index{get\+Data\+ID@{get\+Data\+ID}!Linked\+List@{Linked\+List}}
+\subsubsection{\texorpdfstring{get\+Data\+I\+D()}{getDataID()}}
+{\footnotesize\ttfamily template$<$typename T$>$ \\
+int \hyperlink{class_linked_list}{Linked\+List}$<$ T $>$\+::get\+Data\+ID (\begin{DoxyParamCaption}\item[{T $\ast$}]{data }\end{DoxyParamCaption})}
+
+
+
+get\+Data\+ID retorna id del nodo que posea en punteto T$\ast$ 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & puntero para encontrar el nodo deseado \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+nt que indica el id 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_linked_list_aaf96dde647086d4370cd0b75024c1603}\label{class_linked_list_aaf96dde647086d4370cd0b75024c1603}} 
+\index{Linked\+List@{Linked\+List}!get\+Node\+ID@{get\+Node\+ID}}
+\index{get\+Node\+ID@{get\+Node\+ID}!Linked\+List@{Linked\+List}}
+\subsubsection{\texorpdfstring{get\+Node\+I\+D()}{getNodeID()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\hyperlink{class_node}{Node}$<$ T $>$ \hyperlink{class_linked_list}{Linked\+List}$<$ T $>$\+::get\+Node\+ID (\begin{DoxyParamCaption}\item[{int}]{id }\end{DoxyParamCaption})}
+
+
+
+get\+Node\+ID Obtiene un nodo mediante un int que es un identificador de dicho nodo 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & int que indica el identificador \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{class_node}{Node} que posea el int id ingresado 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_linked_list_ab56d59b74c8d24cd223a4a49a2b5cfb1}\label{class_linked_list_ab56d59b74c8d24cd223a4a49a2b5cfb1}} 
+\index{Linked\+List@{Linked\+List}!get\+Size@{get\+Size}}
+\index{get\+Size@{get\+Size}!Linked\+List@{Linked\+List}}
+\subsubsection{\texorpdfstring{get\+Size()}{getSize()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+int \hyperlink{class_linked_list}{Linked\+List}$<$ T $>$\+::get\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+get\+Size M\+Uestra el tamano de la lista 
+
+\begin{DoxyReturn}{Returns}
+int tamano de lista 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_linked_list_ab607f61fa0222605f6f6dd794555e592}\label{class_linked_list_ab607f61fa0222605f6f6dd794555e592}} 
+\index{Linked\+List@{Linked\+List}!search\+ID@{search\+ID}}
+\index{search\+ID@{search\+ID}!Linked\+List@{Linked\+List}}
+\subsubsection{\texorpdfstring{search\+I\+D()}{searchID()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+bool \hyperlink{class_linked_list}{Linked\+List}$<$ T $>$\+::search\+ID (\begin{DoxyParamCaption}\item[{int}]{id }\end{DoxyParamCaption})}
+
+
+
+search\+ID Regresa un bool que indica si alguno de los nodos posee el id ingresado 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & int que indica el identificador del nodo a buscar \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool que inidica si se encuentra el nodo 
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_linked_list_a35e09287e2d2943707b011208e7a8ed2}\label{class_linked_list_a35e09287e2d2943707b011208e7a8ed2}} 
+\index{Linked\+List@{Linked\+List}!head@{head}}
+\index{head@{head}!Linked\+List@{Linked\+List}}
+\subsubsection{\texorpdfstring{head}{head}}
+{\footnotesize\ttfamily template$<$typename T$>$ \\
+\hyperlink{class_node}{Node}$<$T$>$$\ast$ \hyperlink{class_linked_list}{Linked\+List}$<$ T $>$\+::head}
+
+\mbox{\Hypertarget{class_linked_list_a428d620b6c645b408e0d6afd30335f63}\label{class_linked_list_a428d620b6c645b408e0d6afd30335f63}} 
+\index{Linked\+List@{Linked\+List}!tail@{tail}}
+\index{tail@{tail}!Linked\+List@{Linked\+List}}
+\subsubsection{\texorpdfstring{tail}{tail}}
+{\footnotesize\ttfamily template$<$typename T$>$ \\
+\hyperlink{class_node}{Node}$<$T$>$ $\ast$ \hyperlink{class_linked_list}{Linked\+List}$<$ T $>$\+::tail}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Garbage\+Collector/\hyperlink{_linked_list_8h}{Linked\+List.\+h}\end{DoxyCompactItemize}

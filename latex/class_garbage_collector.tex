@@ -1,0 +1,314 @@
+\hypertarget{class_garbage_collector}{}\section{Garbage\+Collector Class Reference}
+\label{class_garbage_collector}\index{Garbage\+Collector@{Garbage\+Collector}}
+
+
+Se ejecuta como hilo para buscar referencias que se dejan de usar y asi liberar memoria.  
+
+
+
+
+{\ttfamily \#include $<$Garbage\+Collector.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_garbage_collector_a17875db60f5b050647bac7c3d3beec21}{add\+To\+List} (int $\ast$data)
+\begin{DoxyCompactList}\small\item\em add\+To\+List Agrega nodo un nuevo nodo de tipo int \end{DoxyCompactList}\item 
+void \hyperlink{class_garbage_collector_a49ac1532606dd88eb0f7505bc33cd967}{add\+To\+List} (string $\ast$data)
+\begin{DoxyCompactList}\small\item\em add\+To\+List Agrega nodo un nuevo nodo de tipo string \end{DoxyCompactList}\item 
+void \hyperlink{class_garbage_collector_a5bacb8303b1daea1a260b8c2c0102615}{add\+To\+List} (bool $\ast$data)
+\begin{DoxyCompactList}\small\item\em add\+To\+List Agrega nodo un nuevo nodo de tipo bool \end{DoxyCompactList}\item 
+void \hyperlink{class_garbage_collector_ab54fe91f0393b678444ed6ef353635b5}{copy\+Ref} (string $\ast$new\+Data, string $\ast$old\+Data)
+\begin{DoxyCompactList}\small\item\em copy\+Ref Sustituye la informacion de un nodo por new\+Data \end{DoxyCompactList}\item 
+void \hyperlink{class_garbage_collector_a99d3d8fc5d5b7bd13bbe58f4d1b07334}{copy\+Ref} (int $\ast$new\+Data, int $\ast$old\+Data)
+\begin{DoxyCompactList}\small\item\em copy\+Ref Sustituye la informacion de un nodo por new\+Data \end{DoxyCompactList}\item 
+void \hyperlink{class_garbage_collector_ade1e5043ec482abdf97d7a3c0fcaa5d0}{copy\+Ref} (bool $\ast$new\+Data, bool $\ast$old\+Data)
+\begin{DoxyCompactList}\small\item\em copy\+Ref Sustituye la informacion de un nodo por new\+Data \end{DoxyCompactList}\item 
+void \hyperlink{class_garbage_collector_a6e3a72d5b91b1d5c8d2985b449720c6f}{delete\+Data} (string $\ast$remove\+Data)
+\begin{DoxyCompactList}\small\item\em delete\+Data Remueve nodo que guarda un string$\ast$ y elimina referencias de la lista \end{DoxyCompactList}\item 
+void \hyperlink{class_garbage_collector_aaa6a0a08399c3ab0a8ec4b113a468bb6}{delete\+Data} (bool $\ast$remove\+Data)
+\begin{DoxyCompactList}\small\item\em delete\+Data Remueve nodo que guarda un bool$\ast$ y elimina referencias de la lista \end{DoxyCompactList}\item 
+void \hyperlink{class_garbage_collector_a47919d7aa5bc81d22cc714d5d5bf4e29}{delete\+Data} (int $\ast$remove\+Data)
+\begin{DoxyCompactList}\small\item\em delete\+Data Remueve nodo queg guarda un int$\ast$ y elimina referencias de la lista \end{DoxyCompactList}\item 
+int \hyperlink{class_garbage_collector_a2a37351f10e4c5814ba05f0671c867cf}{get\+Data\+ID} (bool $\ast$data)
+\begin{DoxyCompactList}\small\item\em get\+Data\+ID Funcion que busca cual nodo tiene el puntero data y retorna el id de dicho nodo \end{DoxyCompactList}\item 
+int \hyperlink{class_garbage_collector_a2c349aea0136c2e986a5aef3a2335470}{get\+Data\+ID} (string $\ast$data)
+\begin{DoxyCompactList}\small\item\em get\+Data\+ID Funcion que busca cual nodo tiene el puntero data y retorna el id de dicho nodo \end{DoxyCompactList}\item 
+int \hyperlink{class_garbage_collector_ae35f99070654ac6e4beedc41d0685739}{get\+Data\+ID} (int $\ast$data)
+\begin{DoxyCompactList}\small\item\em get\+Data\+ID Funcion que busca cual nodo tiene el puntero data y retorna el id de dicho nodo \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_garbage_collector}{Garbage\+Collector} $\ast$ \hyperlink{class_garbage_collector_ade4bccdf41223cc395b646db3f60ac8b}{get\+Instance} ()
+\begin{DoxyCompactList}\small\item\em get\+Instance Crea instancia singleton de \hyperlink{class_garbage_collector}{Garbage\+Collector} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_linked_list}{Linked\+List}$<$ int $>$ \hyperlink{class_garbage_collector_a932495032998f28dab29ff9b0de2fb0e}{int\+List}
+\item 
+\hyperlink{class_linked_list}{Linked\+List}$<$ string $>$ \hyperlink{class_garbage_collector_a1928ce52cd7439716ed11be72c670879}{string\+List}
+\item 
+\hyperlink{class_linked_list}{Linked\+List}$<$ bool $>$ \hyperlink{class_garbage_collector_aa7d3cb13ece1181c1cab82e3d79b5489}{bool\+List}
+\item 
+bool \hyperlink{class_garbage_collector_a143761ba98ed540dd3cc2a488716bd80}{flag} = false
+\item 
+thread \hyperlink{class_garbage_collector_a7721f0c6f099fe71c61fd7e7bd0f6aae}{thrd}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Se ejecuta como hilo para buscar referencias que se dejan de usar y asi liberar memoria. 
+
+\begin{DoxyAuthor}{Author}
+Mario Gudino  Garbage Collector 
+\end{DoxyAuthor}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_garbage_collector_a17875db60f5b050647bac7c3d3beec21}\label{class_garbage_collector_a17875db60f5b050647bac7c3d3beec21}} 
+\index{Garbage\+Collector@{Garbage\+Collector}!add\+To\+List@{add\+To\+List}}
+\index{add\+To\+List@{add\+To\+List}!Garbage\+Collector@{Garbage\+Collector}}
+\subsubsection{\texorpdfstring{add\+To\+List()}{addToList()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily void Garbage\+Collector\+::add\+To\+List (\begin{DoxyParamCaption}\item[{int $\ast$}]{data }\end{DoxyParamCaption})}
+
+
+
+add\+To\+List Agrega nodo un nuevo nodo de tipo int 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_garbage_collector_a49ac1532606dd88eb0f7505bc33cd967}\label{class_garbage_collector_a49ac1532606dd88eb0f7505bc33cd967}} 
+\index{Garbage\+Collector@{Garbage\+Collector}!add\+To\+List@{add\+To\+List}}
+\index{add\+To\+List@{add\+To\+List}!Garbage\+Collector@{Garbage\+Collector}}
+\subsubsection{\texorpdfstring{add\+To\+List()}{addToList()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily void Garbage\+Collector\+::add\+To\+List (\begin{DoxyParamCaption}\item[{string $\ast$}]{data }\end{DoxyParamCaption})}
+
+
+
+add\+To\+List Agrega nodo un nuevo nodo de tipo string 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Puntero que se asigna al nuevo nodo como un dato \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_garbage_collector_a5bacb8303b1daea1a260b8c2c0102615}\label{class_garbage_collector_a5bacb8303b1daea1a260b8c2c0102615}} 
+\index{Garbage\+Collector@{Garbage\+Collector}!add\+To\+List@{add\+To\+List}}
+\index{add\+To\+List@{add\+To\+List}!Garbage\+Collector@{Garbage\+Collector}}
+\subsubsection{\texorpdfstring{add\+To\+List()}{addToList()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily void Garbage\+Collector\+::add\+To\+List (\begin{DoxyParamCaption}\item[{bool $\ast$}]{data }\end{DoxyParamCaption})}
+
+
+
+add\+To\+List Agrega nodo un nuevo nodo de tipo bool 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Puntero que se asigna al nuevo nodo como un dato \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_garbage_collector_ab54fe91f0393b678444ed6ef353635b5}\label{class_garbage_collector_ab54fe91f0393b678444ed6ef353635b5}} 
+\index{Garbage\+Collector@{Garbage\+Collector}!copy\+Ref@{copy\+Ref}}
+\index{copy\+Ref@{copy\+Ref}!Garbage\+Collector@{Garbage\+Collector}}
+\subsubsection{\texorpdfstring{copy\+Ref()}{copyRef()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily void Garbage\+Collector\+::copy\+Ref (\begin{DoxyParamCaption}\item[{string $\ast$}]{new\+Data,  }\item[{string $\ast$}]{old\+Data }\end{DoxyParamCaption})}
+
+
+
+copy\+Ref Sustituye la informacion de un nodo por new\+Data 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Data} & Nueva data de tipo string puntero que se asigna al nodo \\
+\hline
+{\em old\+Data} & Data string puntero que es sustituida por una nueva \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_garbage_collector_a99d3d8fc5d5b7bd13bbe58f4d1b07334}\label{class_garbage_collector_a99d3d8fc5d5b7bd13bbe58f4d1b07334}} 
+\index{Garbage\+Collector@{Garbage\+Collector}!copy\+Ref@{copy\+Ref}}
+\index{copy\+Ref@{copy\+Ref}!Garbage\+Collector@{Garbage\+Collector}}
+\subsubsection{\texorpdfstring{copy\+Ref()}{copyRef()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily void Garbage\+Collector\+::copy\+Ref (\begin{DoxyParamCaption}\item[{int $\ast$}]{new\+Data,  }\item[{int $\ast$}]{old\+Data }\end{DoxyParamCaption})}
+
+
+
+copy\+Ref Sustituye la informacion de un nodo por new\+Data 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Data} & Nueva data de tipo int puntero que se asigna al nodo \\
+\hline
+{\em old\+Data} & Data int puntero que es sustituida por una nueva \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_garbage_collector_ade1e5043ec482abdf97d7a3c0fcaa5d0}\label{class_garbage_collector_ade1e5043ec482abdf97d7a3c0fcaa5d0}} 
+\index{Garbage\+Collector@{Garbage\+Collector}!copy\+Ref@{copy\+Ref}}
+\index{copy\+Ref@{copy\+Ref}!Garbage\+Collector@{Garbage\+Collector}}
+\subsubsection{\texorpdfstring{copy\+Ref()}{copyRef()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily void Garbage\+Collector\+::copy\+Ref (\begin{DoxyParamCaption}\item[{bool $\ast$}]{new\+Data,  }\item[{bool $\ast$}]{old\+Data }\end{DoxyParamCaption})}
+
+
+
+copy\+Ref Sustituye la informacion de un nodo por new\+Data 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Data} & Nueva data de tipo bool puntero que se asigna al nodo \\
+\hline
+{\em old\+Data} & Data bool puntero que es sustituida por una nueva \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_garbage_collector_a6e3a72d5b91b1d5c8d2985b449720c6f}\label{class_garbage_collector_a6e3a72d5b91b1d5c8d2985b449720c6f}} 
+\index{Garbage\+Collector@{Garbage\+Collector}!delete\+Data@{delete\+Data}}
+\index{delete\+Data@{delete\+Data}!Garbage\+Collector@{Garbage\+Collector}}
+\subsubsection{\texorpdfstring{delete\+Data()}{deleteData()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily void Garbage\+Collector\+::delete\+Data (\begin{DoxyParamCaption}\item[{string $\ast$}]{remove\+Data }\end{DoxyParamCaption})}
+
+
+
+delete\+Data Remueve nodo que guarda un string$\ast$ y elimina referencias de la lista 
+
+
+\begin{DoxyParams}{Parameters}
+{\em remove\+Data} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_garbage_collector_aaa6a0a08399c3ab0a8ec4b113a468bb6}\label{class_garbage_collector_aaa6a0a08399c3ab0a8ec4b113a468bb6}} 
+\index{Garbage\+Collector@{Garbage\+Collector}!delete\+Data@{delete\+Data}}
+\index{delete\+Data@{delete\+Data}!Garbage\+Collector@{Garbage\+Collector}}
+\subsubsection{\texorpdfstring{delete\+Data()}{deleteData()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily void Garbage\+Collector\+::delete\+Data (\begin{DoxyParamCaption}\item[{bool $\ast$}]{remove\+Data }\end{DoxyParamCaption})}
+
+
+
+delete\+Data Remueve nodo que guarda un bool$\ast$ y elimina referencias de la lista 
+
+
+\begin{DoxyParams}{Parameters}
+{\em remove\+Data} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_garbage_collector_a47919d7aa5bc81d22cc714d5d5bf4e29}\label{class_garbage_collector_a47919d7aa5bc81d22cc714d5d5bf4e29}} 
+\index{Garbage\+Collector@{Garbage\+Collector}!delete\+Data@{delete\+Data}}
+\index{delete\+Data@{delete\+Data}!Garbage\+Collector@{Garbage\+Collector}}
+\subsubsection{\texorpdfstring{delete\+Data()}{deleteData()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily void Garbage\+Collector\+::delete\+Data (\begin{DoxyParamCaption}\item[{int $\ast$}]{remove\+Data }\end{DoxyParamCaption})}
+
+
+
+delete\+Data Remueve nodo queg guarda un int$\ast$ y elimina referencias de la lista 
+
+
+\begin{DoxyParams}{Parameters}
+{\em remove\+Data} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_garbage_collector_a2a37351f10e4c5814ba05f0671c867cf}\label{class_garbage_collector_a2a37351f10e4c5814ba05f0671c867cf}} 
+\index{Garbage\+Collector@{Garbage\+Collector}!get\+Data\+ID@{get\+Data\+ID}}
+\index{get\+Data\+ID@{get\+Data\+ID}!Garbage\+Collector@{Garbage\+Collector}}
+\subsubsection{\texorpdfstring{get\+Data\+I\+D()}{getDataID()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily int Garbage\+Collector\+::get\+Data\+ID (\begin{DoxyParamCaption}\item[{bool $\ast$}]{data }\end{DoxyParamCaption})}
+
+
+
+get\+Data\+ID Funcion que busca cual nodo tiene el puntero data y retorna el id de dicho nodo 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & puntero bool el cual se utiliza para buscar el nodo \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int que representa un id asiganado a un nodo especifico 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_garbage_collector_a2c349aea0136c2e986a5aef3a2335470}\label{class_garbage_collector_a2c349aea0136c2e986a5aef3a2335470}} 
+\index{Garbage\+Collector@{Garbage\+Collector}!get\+Data\+ID@{get\+Data\+ID}}
+\index{get\+Data\+ID@{get\+Data\+ID}!Garbage\+Collector@{Garbage\+Collector}}
+\subsubsection{\texorpdfstring{get\+Data\+I\+D()}{getDataID()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily int Garbage\+Collector\+::get\+Data\+ID (\begin{DoxyParamCaption}\item[{string $\ast$}]{data }\end{DoxyParamCaption})}
+
+
+
+get\+Data\+ID Funcion que busca cual nodo tiene el puntero data y retorna el id de dicho nodo 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & puntero string el cual se utiliza para buscar el nodo \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int que representa un id asiganado a un nodo especifico 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_garbage_collector_ae35f99070654ac6e4beedc41d0685739}\label{class_garbage_collector_ae35f99070654ac6e4beedc41d0685739}} 
+\index{Garbage\+Collector@{Garbage\+Collector}!get\+Data\+ID@{get\+Data\+ID}}
+\index{get\+Data\+ID@{get\+Data\+ID}!Garbage\+Collector@{Garbage\+Collector}}
+\subsubsection{\texorpdfstring{get\+Data\+I\+D()}{getDataID()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily int Garbage\+Collector\+::get\+Data\+ID (\begin{DoxyParamCaption}\item[{int $\ast$}]{data }\end{DoxyParamCaption})}
+
+
+
+get\+Data\+ID Funcion que busca cual nodo tiene el puntero data y retorna el id de dicho nodo 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & puntero int el cual se utiliza para buscar el nodo \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int que representa un id asiganado a un nodo especifico 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_garbage_collector_ade4bccdf41223cc395b646db3f60ac8b}\label{class_garbage_collector_ade4bccdf41223cc395b646db3f60ac8b}} 
+\index{Garbage\+Collector@{Garbage\+Collector}!get\+Instance@{get\+Instance}}
+\index{get\+Instance@{get\+Instance}!Garbage\+Collector@{Garbage\+Collector}}
+\subsubsection{\texorpdfstring{get\+Instance()}{getInstance()}}
+{\footnotesize\ttfamily \hyperlink{class_garbage_collector}{Garbage\+Collector} $\ast$ Garbage\+Collector\+::get\+Instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+get\+Instance Crea instancia singleton de \hyperlink{class_garbage_collector}{Garbage\+Collector} 
+
+\begin{DoxyReturn}{Returns}
+Singleton de la clase 
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_garbage_collector_aa7d3cb13ece1181c1cab82e3d79b5489}\label{class_garbage_collector_aa7d3cb13ece1181c1cab82e3d79b5489}} 
+\index{Garbage\+Collector@{Garbage\+Collector}!bool\+List@{bool\+List}}
+\index{bool\+List@{bool\+List}!Garbage\+Collector@{Garbage\+Collector}}
+\subsubsection{\texorpdfstring{bool\+List}{boolList}}
+{\footnotesize\ttfamily \hyperlink{class_linked_list}{Linked\+List}$<$bool$>$ Garbage\+Collector\+::bool\+List}
+
+\mbox{\Hypertarget{class_garbage_collector_a143761ba98ed540dd3cc2a488716bd80}\label{class_garbage_collector_a143761ba98ed540dd3cc2a488716bd80}} 
+\index{Garbage\+Collector@{Garbage\+Collector}!flag@{flag}}
+\index{flag@{flag}!Garbage\+Collector@{Garbage\+Collector}}
+\subsubsection{\texorpdfstring{flag}{flag}}
+{\footnotesize\ttfamily bool Garbage\+Collector\+::flag = false}
+
+\mbox{\Hypertarget{class_garbage_collector_a932495032998f28dab29ff9b0de2fb0e}\label{class_garbage_collector_a932495032998f28dab29ff9b0de2fb0e}} 
+\index{Garbage\+Collector@{Garbage\+Collector}!int\+List@{int\+List}}
+\index{int\+List@{int\+List}!Garbage\+Collector@{Garbage\+Collector}}
+\subsubsection{\texorpdfstring{int\+List}{intList}}
+{\footnotesize\ttfamily \hyperlink{class_linked_list}{Linked\+List}$<$int$>$ Garbage\+Collector\+::int\+List}
+
+\mbox{\Hypertarget{class_garbage_collector_a1928ce52cd7439716ed11be72c670879}\label{class_garbage_collector_a1928ce52cd7439716ed11be72c670879}} 
+\index{Garbage\+Collector@{Garbage\+Collector}!string\+List@{string\+List}}
+\index{string\+List@{string\+List}!Garbage\+Collector@{Garbage\+Collector}}
+\subsubsection{\texorpdfstring{string\+List}{stringList}}
+{\footnotesize\ttfamily \hyperlink{class_linked_list}{Linked\+List}$<$string$>$ Garbage\+Collector\+::string\+List}
+
+\mbox{\Hypertarget{class_garbage_collector_a7721f0c6f099fe71c61fd7e7bd0f6aae}\label{class_garbage_collector_a7721f0c6f099fe71c61fd7e7bd0f6aae}} 
+\index{Garbage\+Collector@{Garbage\+Collector}!thrd@{thrd}}
+\index{thrd@{thrd}!Garbage\+Collector@{Garbage\+Collector}}
+\subsubsection{\texorpdfstring{thrd}{thrd}}
+{\footnotesize\ttfamily thread Garbage\+Collector\+::thrd}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Garbage\+Collector/\hyperlink{_garbage_collector_8h}{Garbage\+Collector.\+h}\item 
+Garbage\+Collector/\hyperlink{_garbage_collector_8cpp}{Garbage\+Collector.\+cpp}\end{DoxyCompactItemize}

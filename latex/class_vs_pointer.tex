@@ -1,0 +1,177 @@
+\hypertarget{class_vs_pointer}{}\section{Vs\+Pointer$<$ T $>$ Class Template Reference}
+\label{class_vs_pointer}\index{Vs\+Pointer$<$ T $>$@{Vs\+Pointer$<$ T $>$}}
+
+
+Clase que define un nuevo tipo de puntero para almacenar datos mediante sobrecarga de operadores.  
+
+
+
+
+{\ttfamily \#include $<$Vs\+Pointer.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_vs_pointer}{Vs\+Pointer} \& \hyperlink{class_vs_pointer_a2dce5e7bf3f34c84debbd01b0c685d10}{operator=} (\hyperlink{class_vs_pointer}{Vs\+Pointer}$<$ T $>$ new\+Data)
+\begin{DoxyCompactList}\small\item\em Sobrecarga de operador "=\textquotesingle{}, copia la direccion de memoria. \end{DoxyCompactList}\item 
+\hyperlink{class_vs_pointer}{Vs\+Pointer} \& \hyperlink{class_vs_pointer_af254cb1b44d921143343865939a8ed8d}{operator=} (T new\+Data)
+\begin{DoxyCompactList}\small\item\em Sobrecarga de operador = para asignar un nuevo dato. \end{DoxyCompactList}\item 
+T \& \hyperlink{class_vs_pointer_a6b59daca87b17efea69428a180857a38}{operator$\ast$} ()
+\begin{DoxyCompactList}\small\item\em Sobrecarga de operador $\ast$ para asignar un nuevo dato. \end{DoxyCompactList}\item 
+T \hyperlink{class_vs_pointer_a0994de6e663a59aa7cb18109ded98e28}{operator \&} ()
+\begin{DoxyCompactList}\small\item\em Sobrecarga de operador \& para asignar un nuevo dato. \end{DoxyCompactList}\item 
+\hyperlink{class_vs_pointer_ad2066426995a68e2fde8c62c55cc2396}{Vs\+Pointer} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_vs_pointer}{Vs\+Pointer} Constructor de la clase \hyperlink{class_vs_pointer}{Vs\+Pointer}. \end{DoxyCompactList}\item 
+\hyperlink{class_vs_pointer_a10c30d26192226abb265366456986eb4}{$\sim$\+Vs\+Pointer} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_vs_pointer}{Vs\+Pointer} Destructor de la clase \hyperlink{class_vs_pointer}{Vs\+Pointer}. \end{DoxyCompactList}\item 
+T $\ast$ \hyperlink{class_vs_pointer_a7460c0d67fdbb0611769d83af012bb6f}{get\+Tdata} ()
+\begin{DoxyCompactList}\small\item\em get\+Tdata Se utiliza para obtener dato guardado generico guardo en puntero \end{DoxyCompactList}\item 
+void \hyperlink{class_vs_pointer_a98bcbff767bf90817c4122639cffb227}{delete\+Ptr} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_vs_pointer}{Vs\+Pointer}$<$ T $>$ \hyperlink{class_vs_pointer_a8ae882f2a0ca90b0c586f79d8c7e3fdc}{New} ()
+\begin{DoxyCompactList}\small\item\em New metodo estatico para instanciar nuevos vspointers. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename T$>$\newline
+class Vs\+Pointer$<$ T $>$}
+
+Clase que define un nuevo tipo de puntero para almacenar datos mediante sobrecarga de operadores. 
+
+\hyperlink{class_vs_pointer}{Vs\+Pointer} 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_vs_pointer_ad2066426995a68e2fde8c62c55cc2396}\label{class_vs_pointer_ad2066426995a68e2fde8c62c55cc2396}} 
+\index{Vs\+Pointer@{Vs\+Pointer}!Vs\+Pointer@{Vs\+Pointer}}
+\index{Vs\+Pointer@{Vs\+Pointer}!Vs\+Pointer@{Vs\+Pointer}}
+\subsubsection{\texorpdfstring{Vs\+Pointer()}{VsPointer()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\hyperlink{class_vs_pointer}{Vs\+Pointer}$<$ T $>$\+::\hyperlink{class_vs_pointer}{Vs\+Pointer} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\hyperlink{class_vs_pointer}{Vs\+Pointer} Constructor de la clase \hyperlink{class_vs_pointer}{Vs\+Pointer}. 
+
+\mbox{\Hypertarget{class_vs_pointer_a10c30d26192226abb265366456986eb4}\label{class_vs_pointer_a10c30d26192226abb265366456986eb4}} 
+\index{Vs\+Pointer@{Vs\+Pointer}!````~Vs\+Pointer@{$\sim$\+Vs\+Pointer}}
+\index{````~Vs\+Pointer@{$\sim$\+Vs\+Pointer}!Vs\+Pointer@{Vs\+Pointer}}
+\subsubsection{\texorpdfstring{$\sim$\+Vs\+Pointer()}{~VsPointer()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\hyperlink{class_vs_pointer}{Vs\+Pointer}$<$ T $>$\+::$\sim$\hyperlink{class_vs_pointer}{Vs\+Pointer} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\hyperlink{class_vs_pointer}{Vs\+Pointer} Destructor de la clase \hyperlink{class_vs_pointer}{Vs\+Pointer}. 
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_vs_pointer_a98bcbff767bf90817c4122639cffb227}\label{class_vs_pointer_a98bcbff767bf90817c4122639cffb227}} 
+\index{Vs\+Pointer@{Vs\+Pointer}!delete\+Ptr@{delete\+Ptr}}
+\index{delete\+Ptr@{delete\+Ptr}!Vs\+Pointer@{Vs\+Pointer}}
+\subsubsection{\texorpdfstring{delete\+Ptr()}{deletePtr()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \hyperlink{class_vs_pointer}{Vs\+Pointer}$<$ T $>$\+::delete\+Ptr (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_vs_pointer_a7460c0d67fdbb0611769d83af012bb6f}\label{class_vs_pointer_a7460c0d67fdbb0611769d83af012bb6f}} 
+\index{Vs\+Pointer@{Vs\+Pointer}!get\+Tdata@{get\+Tdata}}
+\index{get\+Tdata@{get\+Tdata}!Vs\+Pointer@{Vs\+Pointer}}
+\subsubsection{\texorpdfstring{get\+Tdata()}{getTdata()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T $\ast$ \hyperlink{class_vs_pointer}{Vs\+Pointer}$<$ T $>$\+::get\+Tdata (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+get\+Tdata Se utiliza para obtener dato guardado generico guardo en puntero 
+
+\begin{DoxyReturn}{Returns}
+Puntero generico que almacena dato 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_vs_pointer_a8ae882f2a0ca90b0c586f79d8c7e3fdc}\label{class_vs_pointer_a8ae882f2a0ca90b0c586f79d8c7e3fdc}} 
+\index{Vs\+Pointer@{Vs\+Pointer}!New@{New}}
+\index{New@{New}!Vs\+Pointer@{Vs\+Pointer}}
+\subsubsection{\texorpdfstring{New()}{New()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\hyperlink{class_vs_pointer}{Vs\+Pointer}$<$ T $>$ \hyperlink{class_vs_pointer}{Vs\+Pointer}$<$ T $>$\+::New (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+New metodo estatico para instanciar nuevos vspointers. 
+
+\begin{DoxyReturn}{Returns}
+\hyperlink{class_vs_pointer}{Vs\+Pointer} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_vs_pointer_a0994de6e663a59aa7cb18109ded98e28}\label{class_vs_pointer_a0994de6e663a59aa7cb18109ded98e28}} 
+\index{Vs\+Pointer@{Vs\+Pointer}!operator \&@{operator \&}}
+\index{operator \&@{operator \&}!Vs\+Pointer@{Vs\+Pointer}}
+\subsubsection{\texorpdfstring{operator \&()}{operator \&()}}
+{\footnotesize\ttfamily template$<$typename T$>$ \\
+T \hyperlink{class_vs_pointer}{Vs\+Pointer}$<$ T $>$\+::operator\& (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Sobrecarga de operador \& para asignar un nuevo dato. 
+
+\begin{DoxyReturn}{Returns}
+dato guardo en el vspointer 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_vs_pointer_a6b59daca87b17efea69428a180857a38}\label{class_vs_pointer_a6b59daca87b17efea69428a180857a38}} 
+\index{Vs\+Pointer@{Vs\+Pointer}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!Vs\+Pointer@{Vs\+Pointer}}
+\subsubsection{\texorpdfstring{operator$\ast$()}{operator*()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+T \& \hyperlink{class_vs_pointer}{Vs\+Pointer}$<$ T $>$\+::operator$\ast$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Sobrecarga de operador $\ast$ para asignar un nuevo dato. 
+
+\begin{DoxyReturn}{Returns}
+direccion de memoria de T generico 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_vs_pointer_a2dce5e7bf3f34c84debbd01b0c685d10}\label{class_vs_pointer_a2dce5e7bf3f34c84debbd01b0c685d10}} 
+\index{Vs\+Pointer@{Vs\+Pointer}!operator=@{operator=}}
+\index{operator=@{operator=}!Vs\+Pointer@{Vs\+Pointer}}
+\subsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\hyperlink{class_vs_pointer}{Vs\+Pointer}$<$ T $>$ \& \hyperlink{class_vs_pointer}{Vs\+Pointer}$<$ T $>$\+::operator= (\begin{DoxyParamCaption}\item[{\hyperlink{class_vs_pointer}{Vs\+Pointer}$<$ T $>$}]{new\+Data }\end{DoxyParamCaption})}
+
+
+
+Sobrecarga de operador "=\textquotesingle{}, copia la direccion de memoria. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Data} & Vs\+Pointer$<$\+T$>$ el cual es copiado \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+direccion de memoria del vspointer 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_vs_pointer_af254cb1b44d921143343865939a8ed8d}\label{class_vs_pointer_af254cb1b44d921143343865939a8ed8d}} 
+\index{Vs\+Pointer@{Vs\+Pointer}!operator=@{operator=}}
+\index{operator=@{operator=}!Vs\+Pointer@{Vs\+Pointer}}
+\subsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\hyperlink{class_vs_pointer}{Vs\+Pointer}$<$ T $>$ \& \hyperlink{class_vs_pointer}{Vs\+Pointer}$<$ T $>$\+::operator= (\begin{DoxyParamCaption}\item[{T}]{new\+Data }\end{DoxyParamCaption})}
+
+
+
+Sobrecarga de operador = para asignar un nuevo dato. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Data} & Dato el cual es asignado \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+direccion de memoria del vspointer 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Vs\+Ptr/\hyperlink{_vs_pointer_8h}{Vs\+Pointer.\+h}\end{DoxyCompactItemize}
